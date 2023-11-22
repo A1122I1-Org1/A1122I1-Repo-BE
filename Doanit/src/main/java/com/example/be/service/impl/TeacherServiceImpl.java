@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TeacherService implements ITeacherService {
+public class TeacherServiceImpl implements ITeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
     @Override
     public void createTeacher(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
-        TeacherValidator.validate(createUpdateTeacherDTO);
-        teacherRepository.createTeacher(createUpdateTeacherDTO.getAddress(),createUpdateTeacherDTO.getAvatar(), createUpdateTeacherDTO.getDateOfBirth(), createUpdateTeacherDTO.getEmail(), createUpdateTeacherDTO.getName(), createUpdateTeacherDTO.getPhone(),createUpdateTeacherDTO.getDegreeId(),createUpdateTeacherDTO.getFacultyId(),createUpdateTeacherDTO.getAccountId(),createUpdateTeacherDTO.getGender());
+//        TeacherValidator.validate(createUpdateTeacherDTO);
+        teacherRepository.createTeacher(createUpdateTeacherDTO.getAddress(),createUpdateTeacherDTO.getAvatar(), createUpdateTeacherDTO.getDateOfBirth(), createUpdateTeacherDTO.getEmail(), createUpdateTeacherDTO.getName(), createUpdateTeacherDTO.getPhone(),createUpdateTeacherDTO.getDegreeId(),createUpdateTeacherDTO.getFacultyId(),createUpdateTeacherDTO.getGender(),createUpdateTeacherDTO.getAccountId());
     }
 
     @Override

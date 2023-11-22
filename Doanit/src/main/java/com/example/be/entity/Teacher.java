@@ -1,6 +1,7 @@
 package com.example.be.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ public class Teacher {
     private String phone;
     private String email;
     private String avatar;
+
     private Boolean gender;
     private Boolean delete_flag;
     @ManyToOne

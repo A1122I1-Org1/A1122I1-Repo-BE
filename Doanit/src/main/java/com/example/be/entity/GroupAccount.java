@@ -19,9 +19,9 @@ public class GroupAccount {
 
     private String name;
 
-    private boolean delete_flag;
+    private Boolean delete_flag;
 
-    private boolean status;
+    private Boolean status;
 
     @Column(columnDefinition = "DATE")
     private String date;
@@ -35,7 +35,7 @@ public class GroupAccount {
     public GroupAccount() {
     }
 
-    public GroupAccount(Integer id, String name, boolean delete_flag, boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
+    public GroupAccount(Integer id, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
         this.id = id;
         this.name = name;
         this.delete_flag = delete_flag;
@@ -61,19 +61,19 @@ public class GroupAccount {
         this.name = name;
     }
 
-    public boolean isDelete_flag() {
+    public Boolean isDelete_flag() {
         return delete_flag;
     }
 
-    public void setDelete_flag(boolean delete_flag) {
+    public void setDelete_flag(Boolean delete_flag) {
         this.delete_flag = delete_flag;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

@@ -3,7 +3,7 @@ package com.example.be.service;
 
 import com.example.be.entity.Account;
 
-public interface AccountService {
+public interface IAccountService {
 
     Account findByUsername(String username);
 

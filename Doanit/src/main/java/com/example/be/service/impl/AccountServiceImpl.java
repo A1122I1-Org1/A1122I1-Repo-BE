@@ -1,13 +1,14 @@
-package com.codegym.service.impl;
+package com.example.be.service.impl;
 
-import com.codegym.entity.Account;
-import com.codegym.repository.AccountRepository;
-import com.codegym.service.AccountService;
+
+import com.example.be.entity.Account;
+import com.example.be.repository.AccountRepository;
+import com.example.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements IAccountService {
 
     @Autowired
     private AccountRepository accountRepository;

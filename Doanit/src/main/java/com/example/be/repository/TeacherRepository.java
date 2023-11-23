@@ -19,7 +19,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
     void createTeacher(String address, String avatar, String dateOfBirth, String email, String name, String phone, Integer degreeId, Integer facultyId,Boolean gender, Integer accountId);
 
     @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
-            "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree, teacher.faculty_id as faculty," +
+            "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
             "teacher.gender as gender from teacher where teacher.id = ?1 and teacher.delete_flag = true", nativeQuery = true)
     ITeacherUpdateDTO getTeacherById(Integer id);
 

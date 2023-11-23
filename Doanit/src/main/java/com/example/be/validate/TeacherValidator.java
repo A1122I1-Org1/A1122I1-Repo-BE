@@ -2,12 +2,16 @@ package com.example.be.validate;
 
 
 import com.example.be.dto.CreateUpdateTeacherDTO;
+import com.example.be.repository.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.regex.Pattern;
 
+@Component
 public class TeacherValidator {
 
     private static Map<String,String> errors = new HashMap<>();

@@ -3,7 +3,6 @@ package com.example.be.controller;
 
 import com.example.be.dto.AccountRoleDTO;
 import com.example.be.dto.CreateUpdateTeacherDTO;
-import com.example.be.dto.ITeacherUpdateDTO;
 import com.example.be.entity.Account;
 import com.example.be.service.IAccountService;
 import com.example.be.service.ITeacherService;
@@ -13,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,14 +32,15 @@ public class TeacherController {
     @Autowired
     private IAccountService accountService;
 
-    private Map<String,String> errors;
+    @Autowired
+    private TeacherValidator teacherValidator;
 
-    @PostMapping( "/create-teacher")
+    @RequestMapping(value = "/create-teacher", method = RequestMethod.POST)
     public ResponseEntity<?> createTeacher(@RequestBody CreateUpdateTeacherDTO teacherDTO) {
         if (teacherDTO == null) {
             return new ResponseEntity<CreateUpdateTeacherDTO>(HttpStatus.BAD_REQUEST);
         } else {
-            errors = TeacherValidator.validate(teacherDTO);
+            Map<String,String> errors  = teacherValidator.validate(teacherDTO);
             if (errors.isEmpty()) {
                 Account account = new Account();
                 account.setUsername(teacherDTO.getEmail());
@@ -55,17 +58,4 @@ public class TeacherController {
             }
         }
     }
-
-
-    @GetMapping("/getTeacherById/{id}")
-    public ResponseEntity<?> findStudentById(@PathVariable Integer id){
-        ITeacherUpdateDTO teacher = teacherService.getTeacherById(id);
-        if (teacher == null){
-            return new ResponseEntity<>("Giáo viên không tồn tại",HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<ITeacherUpdateDTO>(teacher, HttpStatus.OK);
-    }
-
-//    @PostMapping("")
-//    public ResponseEntity<?> updateTeacher
 }

@@ -13,13 +13,13 @@ import java.util.regex.Pattern;
 
 @Component
 public class TeacherValidator {
+    
+    private final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
+    private final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+    private final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
 
-    private static Map<String,String> errors = new HashMap<>();
-    private static final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
-    private static final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
-    private static final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
-
-    public static Map<String,String> validate(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
+    public Map<String,String> validate(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
+        Map<String,String> errors = new HashMap<>();
         // Validate name
         if (createUpdateTeacherDTO.getName() == null || createUpdateTeacherDTO.getName().isEmpty()) {
             errors.put("errorNameEmpty","Tên giáo viên không được trống");

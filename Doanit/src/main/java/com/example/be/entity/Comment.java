@@ -25,7 +25,7 @@ public class Comment {
     private TopicProcess topicProcess;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     @ManyToOne

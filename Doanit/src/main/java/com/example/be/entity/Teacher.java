@@ -30,7 +30,7 @@ public class Teacher {
 
     @JsonBackReference(value = "account")
     @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     public Teacher() {

@@ -19,11 +19,11 @@ public class Notification {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "account_send_notification_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_send_notification_id", referencedColumnName = "account_id")
     private Account accountSendNotification;
 
     public Notification() {

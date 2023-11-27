@@ -8,14 +8,15 @@ import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "group_account_id")
 @Entity
 @Table(name = "group_account")
 public class GroupAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "group_account_id")
+    private Integer groupAccountId;
 
     private String name;
 
@@ -35,8 +36,9 @@ public class GroupAccount {
     public GroupAccount() {
     }
 
-    public GroupAccount(Integer id, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
-        this.id = id;
+
+    public GroupAccount(Integer groupAccountId, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
+        this.groupAccountId = groupAccountId;
         this.name = name;
         this.delete_flag = delete_flag;
         this.status = status;
@@ -45,12 +47,20 @@ public class GroupAccount {
         this.infoTopicRegisterList = infoTopicRegisterList;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getGroupAccountId() {
+        return groupAccountId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGroupAccountId(Integer groupAccountId) {
+        this.groupAccountId = groupAccountId;
+    }
+
+    public Boolean getDelete_flag() {
+        return delete_flag;
+    }
+
+    public Boolean getStatus() {
+        return status;
     }
 
     public String getName() {

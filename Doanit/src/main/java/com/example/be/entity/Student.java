@@ -10,7 +10,8 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "student_id")
+    private Integer studentId;
     private String name;
     @Column(columnDefinition = "DATE")
     private String dateOfBirth;
@@ -23,23 +24,23 @@ public class Student {
     private Boolean status_join;
 
     @ManyToOne
-    @JoinColumn(name = "grade_id", referencedColumnName = "id")
+    @JoinColumn(name = "grade_id", referencedColumnName = "grade_id")
     private Grade grade;
 
     @ManyToOne
-    @JoinColumn(name = "group_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "group_account_id", referencedColumnName = "group_account_id")
     private GroupAccount groupAccount;
 
     @JsonBackReference(value = "account")
     @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     public Student() {
     }
 
-    public Student(Integer id, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Boolean delete_flag, Boolean status_join, Grade grade, GroupAccount groupAccount, Account account) {
-        this.id = id;
+    public Student(Integer studentId, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Boolean delete_flag, Boolean status_join, Grade grade, GroupAccount groupAccount, Account account) {
+        this.studentId = studentId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -54,20 +55,12 @@ public class Student {
         this.account = account;
     }
 
-    public Boolean getDelete_flag() {
-        return delete_flag;
+    public Integer getStudentId() {
+        return studentId;
     }
 
-    public void setDelete_flag(Boolean delete_flag) {
-        this.delete_flag = delete_flag;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
     }
 
     public String getName() {
@@ -124,6 +117,14 @@ public class Student {
 
     public void setGender(Boolean gender) {
         this.gender = gender;
+    }
+
+    public Boolean getDelete_flag() {
+        return delete_flag;
+    }
+
+    public void setDelete_flag(Boolean delete_flag) {
+        this.delete_flag = delete_flag;
     }
 
     public Boolean getStatus_join() {

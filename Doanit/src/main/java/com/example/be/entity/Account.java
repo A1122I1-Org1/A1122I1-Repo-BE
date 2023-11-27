@@ -10,7 +10,8 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "account_id")
+    private Integer accountId;
 
     private String username;
 
@@ -28,8 +29,8 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer id, String username, String password, List<AccountRole> accountRoleList, Teacher teacher, Student student) {
-        this.id = id;
+    public Account(Integer accountId, String username, String password, List<AccountRole> accountRoleList, Teacher teacher, Student student) {
+        this.accountId = accountId;
         this.username = username;
         this.password = password;
         this.accountRoleList = accountRoleList;
@@ -37,12 +38,12 @@ public class Account {
         this.student = student;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public String getUsername() {

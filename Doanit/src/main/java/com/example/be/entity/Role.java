@@ -8,24 +8,25 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "role_id")
+    private Integer roleId;
 
     private String name;
 
     public Role() {
     }
 
-    public Role(Integer id, String name) {
-        this.id = id;
+    public Role(Integer roleId, String name) {
+        this.roleId = roleId;
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public String getName() {

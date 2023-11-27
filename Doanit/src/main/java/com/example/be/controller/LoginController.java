@@ -52,17 +52,22 @@ public class LoginController {
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
         UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = iAccountService.findByUsername(userPrinciple.getUsername());
-        if (passwordEncoder.matches(passwordChangeDTO.getOldPassword(), account.getPassword())) {
-            if (passwordChangeDTO.getConfimPassword().equalsIgnoreCase(passwordChangeDTO.getNewPassword())) {
-                String encodedPassword = passwordEncoder.encode(passwordChangeDTO.getNewPassword());
-                account.setPassword(encodedPassword);
-                iAccountService.changePassword(account);
-                return new ResponseEntity<>("Đổi mật khẩu thành công", HttpStatus.OK);
-            }
+
+        if (!passwordEncoder.matches(passwordChangeDTO.getOldPassword(), account.getPassword())) {
+            return new ResponseEntity<>("Mật khẩu cũ không đúng", HttpStatus.BAD_REQUEST);
+        }
+
+        if (!passwordChangeDTO.getConfimPassword().equalsIgnoreCase(passwordChangeDTO.getNewPassword())) {
             return new ResponseEntity<>("Mật khẩu mới và mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("Mật khẩu cũ không đúng", HttpStatus.BAD_REQUEST);
+
+        String encodedPassword = passwordEncoder.encode(passwordChangeDTO.getNewPassword());
+        account.setPassword(encodedPassword);
+        iAccountService.changePassword(account);
+
+        return new ResponseEntity<>("Đổi mật khẩu thành công", HttpStatus.OK);
     }
+
 
 
 }

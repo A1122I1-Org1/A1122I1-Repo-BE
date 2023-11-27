@@ -3,7 +3,8 @@ package com.example.be.config;
 import com.example.be.jwt.JwtAuthenticationFilter;
 import com.example.be.security.UserPrincipleService;
 import com.example.be.service.IAccountService;
-import com.example.be.service.AccountServiceImpl;
+
+import com.example.be.service.impl.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserPrincipleService userPrincipleService;
-    @Bean
-    public IAccountService accountServiceService() {
-        return new AccountServiceImpl();
-    }
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();

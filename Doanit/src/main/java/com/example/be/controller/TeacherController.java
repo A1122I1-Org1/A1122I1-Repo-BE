@@ -46,10 +46,10 @@ public class TeacherController {
                 account.setUsername(teacherDTO.getEmail());
                 account.setPassword("123");
                 account = accountService.registerAccount(account);
-                teacherDTO.setAccountId(account.getId());
+                teacherDTO.setAccountId(account.getAccountId());
 
                 AccountRoleDTO accountRoleDTO = new AccountRoleDTO();
-                accountRoleDTO.setAccountId(account.getId());
+                accountRoleDTO.setAccountId(account.getAccountId());
                 accountRoleDTO.setRoleId(2);
                 teacherService.createTeacher(teacherDTO);
                 return new ResponseEntity<CreateUpdateTeacherDTO>(teacherDTO, HttpStatus.OK);

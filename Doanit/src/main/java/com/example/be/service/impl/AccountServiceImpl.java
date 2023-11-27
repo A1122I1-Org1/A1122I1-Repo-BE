@@ -35,7 +35,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public void changePassword(Account account) {
-        accountRepository.save(account);
+        accountRepository.changePassword(account.getUsername(),account.getPassword());
     }
 
     @Override

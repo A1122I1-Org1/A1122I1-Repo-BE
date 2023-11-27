@@ -8,6 +8,7 @@ import com.example.be.jwt.JwtTokenProvider;
 import com.example.be.security.UserPrinciple;
 import com.example.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +30,7 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
     @Autowired
     private IAccountService iAccountService;
     @Autowired
@@ -49,12 +51,12 @@ public class LoginController {
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangeDTO passwordChangeDTO) {
         UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account users = iAccountService.findByUserName(userPrinciple.getUsername());
-        if (passwordEncoder.matches(passwordChangeDTO.getOldPassword(), users.getPassword())) {
+        Account account = iAccountService.findByUsername(userPrinciple.getUsername());
+        if (passwordEncoder.matches(passwordChangeDTO.getOldPassword(), account.getPassword())) {
             if (passwordChangeDTO.getConfimPassword().equalsIgnoreCase(passwordChangeDTO.getNewPassword())) {
                 String encodedPassword = passwordEncoder.encode(passwordChangeDTO.getNewPassword());
-                users.setPassword(encodedPassword);
-                iAccountService.changePassword(users);
+                account.setPassword(encodedPassword);
+                iAccountService.changePassword(account);
                 return new ResponseEntity<>("Đổi mật khẩu thành công", HttpStatus.OK);
             }
             return new ResponseEntity<>("Mật khẩu mới và mật khẩu xác nhận không trùng khớp", HttpStatus.BAD_REQUEST);

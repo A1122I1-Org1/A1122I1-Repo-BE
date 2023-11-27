@@ -9,7 +9,8 @@ public class InfoTopicRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "infor_topic_register_id")
+    private Integer inforTopicRegisterId;
 
     // Kiểm tra xem đề tài đã được xét duyệt hay chưa.
     private Boolean status;
@@ -24,11 +25,11 @@ public class InfoTopicRegister {
     private String descriptionURL;
 
     @ManyToOne
-    @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    @JoinColumn(name = "topic_id", referencedColumnName = "topic_id")
     private Topic topic;
 
     @ManyToOne
-    @JoinColumn(name = "group_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "group_account_id", referencedColumnName = "group_account_id")
     private GroupAccount groupAccount;
 
     @ManyToOne
@@ -41,8 +42,8 @@ public class InfoTopicRegister {
     public InfoTopicRegister() {
     }
 
-    public InfoTopicRegister(Integer id, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
-        this.id = id;
+    public InfoTopicRegister(Integer inforTopicRegisterId, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
+        this.inforTopicRegisterId = inforTopicRegisterId;
         this.status = status;
         this.statusComplete = statusComplete;
         this.topicCancel = topicCancel;
@@ -53,12 +54,12 @@ public class InfoTopicRegister {
         this.processList = processList;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getInforTopicRegisterId() {
+        return inforTopicRegisterId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setInforTopicRegisterId(Integer id) {
+        this.inforTopicRegisterId = id;
     }
 
     public Boolean getStatus() {

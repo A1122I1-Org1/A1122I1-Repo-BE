@@ -11,11 +11,12 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface TopicRepository extends JpaRepository<Topic, Integer> {
-    @Query(
-            value = "Insert into topic(`name`,introduce,image,`content`,delete_flag,faculty_id) value (?1,?2,?3,?4,false,?5)",
-            nativeQuery = true
-    )
-    void saveTopic(String name, String introduce, String image, String content, Integer facultyId);
+
+//    @Query(
+//            value = "Insert into topic(`name`,introduce,image,`content`,delete_flag,faculty_id) value (?1,?2,?3,?4,false,?5)",
+//            nativeQuery = true
+//    )
+//    void saveTopic(String name, String introduce, String image, String content, Integer facultyId);
 
     @Query(value = "SELECT * FROM topic ",
             nativeQuery = true)

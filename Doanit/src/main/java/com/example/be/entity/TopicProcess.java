@@ -29,7 +29,7 @@ public class TopicProcess {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "info_topic_register", referencedColumnName = "id")
+    @JoinColumn(name = "info_topic_register", referencedColumnName = "infor_topic_register_id")
     private InfoTopicRegister infoTopicRegister;
 
     public TopicProcess() {

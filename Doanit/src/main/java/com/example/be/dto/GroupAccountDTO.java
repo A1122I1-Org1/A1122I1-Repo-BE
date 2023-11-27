@@ -1,15 +1,15 @@
 package com.example.be.dto;
 
-public class GroupAccountDto {
+public class GroupAccountDTO {
     Integer id;
     String name;
 
-    public GroupAccountDto(Integer id, String name) {
+    public GroupAccountDTO(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public GroupAccountDto() {
+    public GroupAccountDTO() {
     }
 
     public Integer getId() {

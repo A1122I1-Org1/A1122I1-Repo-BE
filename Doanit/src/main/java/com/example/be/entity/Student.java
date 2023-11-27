@@ -27,7 +27,7 @@ public class Student {
     private Grade grade;
 
     @ManyToOne
-    @JoinColumn(name = "group_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "group_account_id", referencedColumnName = "group_account_id")
     private GroupAccount groupAccount;
 
     @JsonBackReference(value = "account")

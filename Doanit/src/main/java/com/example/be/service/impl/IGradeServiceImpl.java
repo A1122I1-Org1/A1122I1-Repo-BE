@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GradeServiceImpl implements IGradeService {
+public class IGradeServiceImpl implements IGradeService {
     @Autowired
     GradeRepository gradeRepository;
 
     /**
-     * TinVT
      * Find All Grade
      */
     @Override

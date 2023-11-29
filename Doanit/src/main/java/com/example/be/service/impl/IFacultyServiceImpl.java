@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FacultyServiceImpl implements IFacultyService {
+public class IFacultyServiceImpl implements IFacultyService {
     @Autowired
     FacultyRepository facultyRepository;
     @Override

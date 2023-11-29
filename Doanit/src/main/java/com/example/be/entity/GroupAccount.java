@@ -8,7 +8,7 @@ import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "group_account_id")
+        property = "groupAccountId")
 @Entity
 @Table(name = "group_account")
 public class GroupAccount {

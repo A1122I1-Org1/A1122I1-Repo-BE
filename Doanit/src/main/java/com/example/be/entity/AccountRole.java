@@ -35,8 +35,10 @@ public class AccountRole {
         return accountRoleId;
     }
 
-    public void setAccountRoleId(Integer id) {
-        this.accountRoleId = id;
+
+    public void setAccountRoleId(Integer accountRoleId) {
+        this.accountRoleId = accountRoleId;
+
     }
 
     public Account getAccount() {

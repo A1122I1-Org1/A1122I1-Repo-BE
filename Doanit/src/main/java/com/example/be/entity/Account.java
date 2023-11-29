@@ -39,4 +39,60 @@ public class Account {
     public Account() {
     }
 
+    public Account(Integer accountId, String username, String password, Set<AccountRole> roles, Teacher teacher, Student student) {
+        this.accountId = accountId;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+        this.teacher = teacher;
+        this.student = student;
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<AccountRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<AccountRole> roles) {
+        this.roles = roles;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

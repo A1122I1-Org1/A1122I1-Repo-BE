@@ -32,15 +32,15 @@ public class TeacherController {
     @Autowired
     private IAccountService accountService;
 
-    private Map<String,String> errors;
+    @Autowired
+    private TeacherValidator teacherValidator;
 
     @RequestMapping(value = "/create-teacher", method = RequestMethod.POST)
     public ResponseEntity<?> createTeacher(@RequestBody CreateUpdateTeacherDTO teacherDTO) {
         if (teacherDTO == null) {
             return new ResponseEntity<CreateUpdateTeacherDTO>(HttpStatus.BAD_REQUEST);
         } else {
-            errors = TeacherValidator.validate(teacherDTO);
-
+            Map<String,String> errors  = teacherValidator.validate(teacherDTO);
             if (errors.isEmpty()) {
                 Account account = new Account();
                 account.setUsername(teacherDTO.getEmail());

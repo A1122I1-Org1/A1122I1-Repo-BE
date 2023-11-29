@@ -17,12 +17,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/v1/auth")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+
 @RestController
 public class LoginController {
 
@@ -66,6 +65,17 @@ public class LoginController {
         iAccountService.changePassword(account);
 
         return new ResponseEntity<>("Đổi mật khẩu thành công", HttpStatus.OK);
+    }
+    @GetMapping("/detail-info")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<?> detailInfo(){
+        UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = iAccountService.findByUsername(userPrinciple.getUsername());
+        if (account==null){
+            return new ResponseEntity<>( "Người dùng không tồn tại",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(account,HttpStatus.OK);
+
     }
 
 

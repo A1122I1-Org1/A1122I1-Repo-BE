@@ -34,6 +34,16 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
+    public Account findByUserName(String userName) {
+        return null;
+    }
+
+    @Override
+    public boolean existsByUserName(String userName) {
+        return false;
+    }
+
+    @Override
     public void changePassword(Account account) {
         accountRepository.changePassword(account.getUsername(),account.getPassword());
     }

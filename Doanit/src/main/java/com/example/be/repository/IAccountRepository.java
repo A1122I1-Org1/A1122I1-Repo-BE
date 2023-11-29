@@ -15,13 +15,13 @@ public interface IAccountRepository extends JpaRepository<Account,Integer> {
     Account findByUsername(@Param("username") String username);
 
     boolean existsByUsername(String userName);
-    Account findByStudent_Id(Integer student_id);
-
-    Account findByTeacher_Id(Integer teacher_id);
 
     @Transactional
     @Modifying
     @Query(value = "UPDATE Account a SET a.password = :pass WHERE a.username = :username")
     void changePassword(@Param("username") String username, @Param("pass") String pass);
 
+    Account findByStudent_Id(Integer student_id);
+
+    Account findByTeacher_Id(Integer teacher_id);
 }

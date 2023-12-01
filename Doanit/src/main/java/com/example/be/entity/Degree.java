@@ -8,24 +8,25 @@ public class Degree {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "degree_id")
+    private Integer degreeId;
 
     private String name;
 
     public Degree() {
     }
 
-    public Degree(Integer id, String name) {
-        this.id = id;
+    public Degree(Integer degreeId, String name) {
+        this.degreeId = degreeId;
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getDegreeId() {
+        return degreeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDegreeId(Integer degreeId) {
+        this.degreeId = degreeId;
     }
 
     public String getName() {

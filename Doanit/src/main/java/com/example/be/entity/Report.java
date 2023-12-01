@@ -8,7 +8,8 @@ public class Report {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "report_id")
+    private Integer reportId;
 
     @Column(columnDefinition = "text")
     private String url;
@@ -29,14 +30,14 @@ public class Report {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "topic_process_id", referencedColumnName = "id")
+    @JoinColumn(name = "topic_process_id", referencedColumnName = "topic_process_id")
     private TopicProcess topicProcess;
 
     public Report() {
     }
 
-    public Report(Integer id, String url, String date, String title, String content, TopicProcess topicProcess) {
-        this.id = id;
+    public Report(Integer reportId, String url, String date, String title, String content, TopicProcess topicProcess) {
+        this.reportId = reportId;
         this.url = url;
         this.date = date;
         this.title = title;
@@ -44,12 +45,12 @@ public class Report {
         this.topicProcess = topicProcess;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getReportId() {
+        return reportId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setReportId(Integer reportId) {
+        this.reportId = reportId;
     }
 
     public String getUrl() {

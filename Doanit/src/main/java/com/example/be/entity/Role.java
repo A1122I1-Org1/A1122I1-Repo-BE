@@ -1,38 +1,19 @@
 package com.example.be.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Data
 public class Role {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "role_id")
+    private Integer roleId;
 
-    private String name;
+    @Column(name = "role_name")
+    @Enumerated(EnumType.STRING)//lưu trữ biểu diễn chuỗi của một giá trị enum,mặc định thi nó là number
+    private ERole roleName;
 
-    public Role() {
-    }
-
-    public Role(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

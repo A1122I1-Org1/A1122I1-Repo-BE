@@ -8,7 +8,9 @@ public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
+    @Column(name = "notification_id") // Đặt tên cột tại đây
+    private Integer notificationId;
 
     @Column(columnDefinition = "DATETIME")
     private String timeNotification;
@@ -19,18 +21,18 @@ public class Notification {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "account_send_notification_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_send_notification_id", referencedColumnName = "account_id")
     private Account accountSendNotification;
 
     public Notification() {
     }
 
-    public Notification(Integer id, String timeNotification, String content, String title, Boolean status, String url, Account account, Account accountSendNotification) {
-        this.id = id;
+    public Notification(Integer notificationId, String timeNotification, String content, String title, Boolean status, String url, Account account, Account accountSendNotification) {
+        this.notificationId = notificationId;
         this.timeNotification = timeNotification;
         this.content = content;
         this.title = title;
@@ -40,12 +42,12 @@ public class Notification {
         this.accountSendNotification = accountSendNotification;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getNotificationId() {
+        return notificationId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setNotificationId(Integer notificationId) {
+        this.notificationId = notificationId;
     }
 
     public String getTimeNotification() {

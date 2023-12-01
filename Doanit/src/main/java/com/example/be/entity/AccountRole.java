@@ -10,32 +10,33 @@ public class AccountRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "account_role_id")
+    private Integer accountRoleId;
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "account_id")
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private Role role;
 
     public AccountRole() {
     }
 
-    public AccountRole(Integer id, Account account, Role role) {
-        this.id = id;
+    public AccountRole(Integer accountRoleId, Account account, Role role) {
+        this.accountRoleId = accountRoleId;
         this.account = account;
         this.role = role;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAccountRoleId() {
+        return accountRoleId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountRoleId(Integer accountRoleId) {
+        this.accountRoleId = accountRoleId;
     }
 
     public Account getAccount() {

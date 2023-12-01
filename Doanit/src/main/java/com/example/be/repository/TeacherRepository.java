@@ -19,22 +19,22 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
             "teacher.degree_id, teacher.faculty_id, teacher.gender,teacher.account_id, teacher.delete_flag) value (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10, true )",nativeQuery = true)
     void createTeacher(String address, String avatar, String dateOfBirth, String email, String name, String phone, Integer degreeId, Integer facultyId,Boolean gender, Integer accountId);
 
-    @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
+    @Query(value = "select teacher.teacher_id as teacherId, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
             "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
-            "teacher.gender as gender from teacher where teacher.id = ?1 and teacher.delete_flag = true", nativeQuery = true)
+            "teacher.gender as gender from teacher where teacher.teacher_id = ?1 and teacher.delete_flag = true", nativeQuery = true)
     ITeacherUpdateDTO getTeacherById(Integer id);
 
     @Modifying
     @Query(value = "update teacher set teacher.address = ?1, teacher.avatar = ?2, teacher.date_of_birth = ?3, teacher.email = ?4, teacher.name = ?5, teacher.phone = ?6, teacher.degree_id = ?7," +
-            "teacher.faculty_id = ?8, teacher.gender = ?9 where teacher.id = ?10", nativeQuery = true)
+            "teacher.faculty_id = ?8, teacher.gender = ?9 where teacher.teacher_id = ?10", nativeQuery = true)
     void updateTeacher(String address, String avatar, String dateOfBirth, String email, String name, String phone, Integer degree, Integer faculty, Boolean gender, Integer id);
 
-    @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
+    @Query(value = "select teacher.teacher_id as teacherId, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
             "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
             "teacher.gender as gender from teacher where teacher.email = ?1 and teacher.delete_flag = true", nativeQuery = true)
     List<ITeacherUpdateDTO> getTeacherByEmail(String email);
 
-    @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
+    @Query(value = "select teacher.teacher_id as teacherId, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
             "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
             "teacher.gender as gender from teacher where teacher.phone = ?1 and teacher.delete_flag = true", nativeQuery = true)
     List<ITeacherUpdateDTO> getTeacherByPhone(String phone);

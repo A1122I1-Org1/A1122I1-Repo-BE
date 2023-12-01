@@ -1,7 +1,7 @@
 package com.example.be.dto;
 
 public class CreateUpdateTeacherDTO{
-        private Integer id;
+        private Integer teacherId;
         private String name;
         private String dateOfBirth;
         private String address;
@@ -18,7 +18,7 @@ public class CreateUpdateTeacherDTO{
         }
 
     public CreateUpdateTeacherDTO(Integer id, String name, String dateOfBirth, String address, String phone, String email, Integer facultyId, Integer degreeId, String avatar, Boolean gender, Integer accountId) {
-        this.id = id;
+        this.teacherId = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -31,12 +31,12 @@ public class CreateUpdateTeacherDTO{
         this.accountId = accountId;
     }
 
-    public Integer getId() {
-            return id;
+    public Integer getTeacherId() {
+            return teacherId;
         }
 
-        public void setId(Integer id) {
-            this.id = id;
+        public void setTeacherId(Integer teacherId) {
+            this.teacherId = teacherId;
         }
 
         public String getName() {

@@ -1,10 +1,16 @@
 package com.example.be.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class PasswordChangeDTO {
-     private String oldPassword,newPassword,confimPassword;
+    private String oldPassword, newPassword, confirmPassword;
+
 
     public String getOldPassword() {
-        return oldPassword;
+        return this.oldPassword;
     }
 
     public void setOldPassword(String oldPassword) {
@@ -12,7 +18,7 @@ public class PasswordChangeDTO {
     }
 
     public String getNewPassword() {
-        return newPassword;
+        return this.newPassword;
     }
 
     public void setNewPassword(String newPassword) {
@@ -20,10 +26,10 @@ public class PasswordChangeDTO {
     }
 
     public String getConfimPassword() {
-        return confimPassword;
+        return this.confirmPassword;
     }
 
-    public void setConfimPassword(String confimPassword) {
-        this.confimPassword = confimPassword;
+    public void setConfimPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

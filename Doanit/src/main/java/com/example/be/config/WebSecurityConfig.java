@@ -3,7 +3,8 @@ package com.example.be.config;
 import com.example.be.jwt.JwtAuthenticationFilter;
 import com.example.be.security.UserPrincipleService;
 import com.example.be.service.IAccountService;
-import com.example.be.service.AccountServiceImpl;
+
+import com.example.be.service.impl.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -24,10 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserPrincipleService userPrincipleService;
-    @Bean
-    public IAccountService accountServiceService() {
-        return new AccountServiceImpl();
-    }
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -55,9 +53,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors()// ngăn chặn request từ các domain khác
                 .and().csrf().disable()// tắt mặt định tấn công xác thực
                 .authorizeRequests()// phân quyền request
-                .antMatchers("/api/v1/auth/**").permitAll()//Không cần xác thực
+                .antMatchers("/api/v1/auth/sign-in").permitAll()//Không cần xác thực
                 .anyRequest().authenticated();
         //Thêm 1 lớp Filter kt jwt
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
+   /* @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors()// ngăn chặn request từ các domain khác
+                .and().csrf().disable()// tắt mặt định tấn công xác thực
+                .authorizeRequests()// phân quyền request
+                .antMatchers("/api/v1/auth/sign-in").permitAll()//Không cần xác thực
+                .antMatchers("/api/v1/users/**").hasRole("USER")
+                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
+        //Thêm 1 lớp Filter kt jwt
+        httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+*/
 }

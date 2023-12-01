@@ -23,11 +23,10 @@ public class Account {
     @JsonIgnore
     //Khi serialize trường password sẽ không được bao gồm trong chuỗi JSON kết quả
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "account_role",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+
+    private Set<AccountRole> roles = new HashSet<>();
 
     @OneToOne(mappedBy = "account")
     private Teacher teacher;

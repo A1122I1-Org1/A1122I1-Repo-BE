@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -28,5 +29,14 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
             "teacher.faculty_id = ?8, teacher.gender = ?9 where teacher.id = ?10", nativeQuery = true)
     void updateTeacher(String address, String avatar, String dateOfBirth, String email, String name, String phone, Integer degree, Integer faculty, Boolean gender, Integer id);
 
+    @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
+            "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
+            "teacher.gender as gender from teacher where teacher.email = ?1 and teacher.delete_flag = true", nativeQuery = true)
+    List<ITeacherUpdateDTO> getTeacherByEmail(String email);
+
+    @Query(value = "select teacher.id as id, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
+            "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
+            "teacher.gender as gender from teacher where teacher.phone = ?1 and teacher.delete_flag = true", nativeQuery = true)
+    List<ITeacherUpdateDTO> getTeacherByPhone(String phone);
 
 }

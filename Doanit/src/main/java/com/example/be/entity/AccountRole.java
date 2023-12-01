@@ -25,13 +25,8 @@ public class AccountRole {
     public AccountRole() {
     }
 
-<<<<<<< HEAD
-    public AccountRole(Integer id, Account account, Role role) {
-        this.accountRoleId = id;
-=======
     public AccountRole(Integer accountRoleId, Account account, Role role) {
         this.accountRoleId = accountRoleId;
->>>>>>> main
         this.account = account;
         this.role = role;
     }
@@ -40,13 +35,9 @@ public class AccountRole {
         return accountRoleId;
     }
 
-<<<<<<< HEAD
-    public void setAccountRoleId(Integer id) {
-        this.accountRoleId = id;
-=======
+
     public void setAccountRoleId(Integer accountRoleId) {
         this.accountRoleId = accountRoleId;
->>>>>>> main
     }
 
     public Account getAccount() {
@@ -64,9 +55,6 @@ public class AccountRole {
     public void setRole(Role role) {
         this.role = role;
     }
-<<<<<<< HEAD
 
 }
-=======
-}
->>>>>>> main
+

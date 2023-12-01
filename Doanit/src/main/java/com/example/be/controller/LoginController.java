@@ -41,7 +41,7 @@ public class LoginController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserPrinciple userPrinciple = (UserPrinciple) authentication.getPrincipal();
         String token = jwtTokenProvider.genarateToken(userPrinciple);
-            return ResponseEntity.
+        return ResponseEntity.
                 ok(new JwtDTO(token, userPrinciple.getUsername(), userPrinciple.getAuthorities()));
     }
 
@@ -61,14 +61,15 @@ public class LoginController {
         }
         return new ResponseEntity<>("Mật khẩu cũ không đúng", HttpStatus.BAD_REQUEST);
     }
-    @GetMapping("/detail-info")
+
+    @GetMapping("/user-info")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<?> detailInfo(){
+    public ResponseEntity<?> detailInfo() {
         UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = iAccountService.findByUsername(userPrinciple.getUsername());
-        if (account==null){
-            return new ResponseEntity<>( "Người dùng không tồn tại",HttpStatus.BAD_REQUEST);
+        if (account == null) {
+            return new ResponseEntity<>("Người dùng không tồn tại", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(account,HttpStatus.OK);
+        return new ResponseEntity<>(account, HttpStatus.OK);
     }
 }

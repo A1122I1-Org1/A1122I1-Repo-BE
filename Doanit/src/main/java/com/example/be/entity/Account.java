@@ -23,17 +23,12 @@ public class Account {
     @JsonIgnore
     //Khi serialize trường password sẽ không được bao gồm trong chuỗi JSON kết quả
     private String password;
-<<<<<<< HEAD
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
-
-=======
     //    @ManyToMany(fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
 //    @JoinTable(name = "account_role",
 //            joinColumns = @JoinColumn(name = "account_id"),
 //            inverseJoinColumns = @JoinColumn(name = "role_id"))
->>>>>>> main
     private Set<AccountRole> roles = new HashSet<>();
 
     @OneToOne(mappedBy = "account")
@@ -45,9 +40,8 @@ public class Account {
     public Account() {
     }
 
-<<<<<<< HEAD
-}
-=======
+
+
     public Integer getAccountId() {
         return accountId;
     }
@@ -96,4 +90,4 @@ public class Account {
         this.student = student;
     }
 }
->>>>>>> main
+

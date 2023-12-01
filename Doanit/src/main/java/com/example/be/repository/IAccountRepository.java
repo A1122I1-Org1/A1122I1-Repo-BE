@@ -15,9 +15,6 @@ public interface IAccountRepository extends JpaRepository<Account,Integer> {
     Account findByUsername(@Param("username") String username);
 
     boolean existsByUsername(String userName);
-    Account findByStudent_Id(Integer student_id);
-
-    Account findByTeacher_Id(Integer teacher_id);
 
     @Transactional
     @Modifying

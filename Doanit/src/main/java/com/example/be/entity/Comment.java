@@ -8,7 +8,8 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "comment_id")
+    private Integer commentId;
 
     @Column(columnDefinition = "DATETIME")
     private String timeComment;
@@ -21,7 +22,7 @@ public class Comment {
     private Boolean deleteFlag;
 
     @ManyToOne
-    @JoinColumn(name = "topic_process_id", referencedColumnName = "id")
+    @JoinColumn(name = "topic_process_id", referencedColumnName = "topic_process_id")
     private TopicProcess topicProcess;
 
     @ManyToOne
@@ -29,14 +30,14 @@ public class Comment {
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "reply_comment_id", referencedColumnName = "id")
+    @JoinColumn(name = "reply_comment_id", referencedColumnName = "comment_id")
     private Comment replyComment;
 
     public Comment() {
     }
 
-    public Comment(Integer id, String timeComment, String title, String content, Boolean status, Boolean deleteFlag, TopicProcess topicProcess, Account account, Comment replyComment) {
-        this.id = id;
+    public Comment(Integer commentId, String timeComment, String title, String content, Boolean status, Boolean deleteFlag, TopicProcess topicProcess, Account account, Comment replyComment) {
+        this.commentId = commentId;
         this.timeComment = timeComment;
         this.title = title;
         this.content = content;
@@ -47,12 +48,12 @@ public class Comment {
         this.replyComment = replyComment;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
     public String getTimeComment() {

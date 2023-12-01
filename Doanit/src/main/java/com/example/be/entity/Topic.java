@@ -8,7 +8,8 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "topic_id")
+    private Integer topicId;
 
     private String name;
     @Column(columnDefinition = "TEXT")
@@ -21,14 +22,14 @@ public class Topic {
     private Boolean deleteFlag;
 
     @ManyToOne
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
     private Faculty faculty;
 
     public Topic() {
     }
 
-    public Topic(Integer id, String name, String introduce, String image, String content, Boolean deleteFlag, Faculty faculty) {
-        this.id = id;
+    public Topic(Integer topicId, String name, String introduce, String image, String content, Boolean deleteFlag, Faculty faculty) {
+        this.topicId = topicId;
         this.name = name;
         this.introduce = introduce;
         this.image = image;
@@ -37,12 +38,12 @@ public class Topic {
         this.faculty = faculty;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getTopicId() {
+        return topicId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 
     public String getName() {

@@ -11,7 +11,8 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "teacher_id")
+    private Integer teacherId;
     private String name;
     @Column(columnDefinition = "DATE")
     private String dateOfBirth;
@@ -23,11 +24,11 @@ public class Teacher {
     private Boolean gender;
     private Boolean delete_flag;
     @ManyToOne
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
     private Faculty faculty;
 
     @ManyToOne
-    @JoinColumn(name = "degree_id", referencedColumnName = "id")
+    @JoinColumn(name = "degree_id", referencedColumnName = "degree_id")
     private Degree degree;
 
     @JsonBackReference(value = "account")
@@ -38,8 +39,8 @@ public class Teacher {
     public Teacher() {
     }
 
-    public Teacher(Integer id, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Boolean delete_flag, Faculty faculty, Degree degree, Account account) {
-        this.id = id;
+    public Teacher(Integer teacherId, String name, String dateOfBirth, String address, String phone, String email, String avatar, Boolean gender, Boolean delete_flag, Faculty faculty, Degree degree, Account account) {
+        this.teacherId = teacherId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -53,6 +54,14 @@ public class Teacher {
         this.account = account;
     }
 
+    public Integer getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
+    }
+
     public Boolean getDelete_flag() {
         return delete_flag;
     }
@@ -61,13 +70,6 @@ public class Teacher {
         this.delete_flag = delete_flag;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

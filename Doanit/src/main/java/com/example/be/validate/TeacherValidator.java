@@ -2,21 +2,28 @@ package com.example.be.validate;
 
 
 import com.example.be.dto.CreateUpdateTeacherDTO;
+import com.example.be.dto.ITeacherUpdateDTO;
+import com.example.be.repository.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 import java.util.regex.Pattern;
 
+@Component
 public class TeacherValidator {
 
-    private static Map<String,String> errors = new HashMap<>();
-    private static final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
-    private static final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
-    private static final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
+    @Autowired
+    private TeacherRepository teacherRepository;
+    
+    private final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
+    private final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+    private final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
 
-    public static Map<String,String> validate(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
-        // Validate name
+    public Map<String,String> validate(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
+        Map<String,String> errors = new HashMap<>();
         if (createUpdateTeacherDTO.getName() == null || createUpdateTeacherDTO.getName().isEmpty()) {
             errors.put("errorNameEmpty","Tên giáo viên không được trống");
         }
@@ -27,7 +34,6 @@ public class TeacherValidator {
             errors.put("errorNameSpecialCharacter","Tên không được chứa các kí tự đặc biệt");
         }
 
-        // Validate date of birth
         if (createUpdateTeacherDTO.getDateOfBirth() == null || createUpdateTeacherDTO.getDateOfBirth().isEmpty()) {
             errors.put("errorDateEmpty","Ngày tháng năm sinh không được để trống");
         }
@@ -40,7 +46,6 @@ public class TeacherValidator {
             errors.put("errorDateMax","Giáo viên không được lớn hơn 50 tuổi");
         }
 
-        // Validate phone
         if (createUpdateTeacherDTO.getPhone() == null || createUpdateTeacherDTO.getPhone().isEmpty()) {
             errors.put("errorPhoneEmpty","Số điện thoại không được để trống");
         }
@@ -51,7 +56,6 @@ public class TeacherValidator {
             errors.put("errorPhoneNumber","Số điện thoại chỉ được chứa số");
         }
 
-        // Validate email
         if (createUpdateTeacherDTO.getEmail() == null || createUpdateTeacherDTO.getEmail().isEmpty()) {
             errors.put("errorEmailEmpty","Email không được để trống");
         }
@@ -62,32 +66,16 @@ public class TeacherValidator {
             errors.put("errorEmailFormat","Email không hợp lệ");
         }
 
-//        // Validate phone duplicate
-//        if (createUpdateTeacherDTO.getId() == null) {
-//            Teacher teacher = TeacherRepository.findByEmail(createUpdateTeacherDTO.getEmail());
-//            if (teacher != null) {
-//                throw new IllegalArgumentException("Email đã tồn tại");
-//            }
-//
-//            teacher = TeacherRepository.findByPhone(createUpdateTeacherDTO.getPhone());
-//            if (teacher != null) {
-//                throw new IllegalArgumentException("Số điện thoại đã tồn tại");
-//            }
-//        } else {
-//            Teacher teacher = TeacherRepository.findById(createUpdateTeacherDTO.getId()).orElse(null);
-//            if (teacher != null && !teacher.getEmail().equals(createUpdateTeacherDTO.getEmail())) {
-//                Teacher otherTeacher = TeacherRepository.findByEmail(createUpdateTeacherDTO.getEmail());
-//                if (otherTeacher != null) {
-//                    throw new IllegalArgumentException("Email đã tồn tại");
-//                }
-//            }
-//
-//            if (teacher != null && !teacher.getPhone().equals(createUpdateTeacherDTO.getPhone())) {
-//                Teacher otherTeacher = TeacherRepository.findByPhone(createUpdateTeacherDTO.getPhone());
-//                if (otherTeacher != null) {
-//                    throw new
-//
-//            }
+
+            List<ITeacherUpdateDTO> teachers = teacherRepository.getTeacherByPhone(createUpdateTeacherDTO.getPhone());
+            if (!teachers.isEmpty()) {
+                errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
+            }
+
+            teachers = teacherRepository.getTeacherByEmail(createUpdateTeacherDTO.getEmail());
+            if (!teachers.isEmpty()) {
+                errors.put("errorEmailDuplicate","Email đã tồn tại");
+            }
 
 
         if (createUpdateTeacherDTO.getAvatar() != null && !createUpdateTeacherDTO.getAvatar().isEmpty()) {

@@ -1,7 +1,7 @@
 package com.example.be.dto;
 
 public interface ITeacherUpdateDTO {
-    Integer getId();
+    Integer getTeacherId();
     String getAddress();
     String getAvatar();
     String getDateOfBirth();

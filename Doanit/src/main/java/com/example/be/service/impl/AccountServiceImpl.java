@@ -23,15 +23,6 @@ public class AccountServiceImpl implements IAccountService {
         return accountRepository.findById(idAccount).orElse(null);
     }
 
-    @Override
-    public Account getAccountByIdStudent(Integer id) {
-        return accountRepository.findByStudent_Id(id);
-    }
-
-    @Override
-    public Account getAccountByIdTeacher(Integer id) {
-        return accountRepository.findByTeacher_Id(id);
-    }
 
     @Override
     public void changePassword(Account account) {

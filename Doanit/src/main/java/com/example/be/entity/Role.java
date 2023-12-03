@@ -16,4 +16,6 @@ public class Role {
     @Enumerated(EnumType.STRING)//lưu trữ biểu diễn chuỗi của một giá trị enum,mặc định thi nó là number
     private ERole roleName;
 
+
 }
+

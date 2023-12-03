@@ -20,10 +20,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = "SELECT * FROM student " +
             "JOIN grade ON student.grade_id = grade.grade_id " +
             "JOIN faculty ON grade.faculty_id = faculty.faculty_id " +
-            "WHERE CONCAT('MSV-', student.student_id, IFNULL(student.name, ''), IFNULL(student.address, ''), IFNULL(student.date_of_birth, ''), IFNULL(student.email, ''), IFNULL(student.phone, ''), faculty.name) " +
+            "WHERE CONCAT('MSV', student.student_id, ' ', IFNULL(student.name, '')) " +
             "LIKE CONCAT('%', ?1, '%') AND student.delete_flag = 1 " +
-            "ORDER BY student.student_id"
-            , nativeQuery = true)
+            "ORDER BY student.student_id",
+            nativeQuery = true)
     Page<Student> getAllStudent(String find,  Pageable pageable);
     /**
      * Get All Student For Teacher
@@ -31,7 +31,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = "SELECT *  FROM student " +
             "JOIN grade ON student.grade_id = grade.grade_id " +
             "JOIN faculty ON grade.faculty_id = faculty.faculty_id " +
-            "WHERE CONCAT('MSV-', student.student_id, IFNULL(student.name, ''), IFNULL(student.address, ''), IFNULL(student.date_of_birth, ''), IFNULL(student.email, ''), IFNULL(student.phone, ''), faculty.name) " +
+            "WHERE CONCAT('MSV" +
+            "', student.student_id, IFNULL(student.name, '')) " +
             "LIKE CONCAT('%', ?1, '%') AND student.delete_flag = 1 " +
             "AND student.student_id IN (SELECT student.student_id FROM student " +
             "JOIN group_account ON student.group_account_id = group_account.group_account_id " +

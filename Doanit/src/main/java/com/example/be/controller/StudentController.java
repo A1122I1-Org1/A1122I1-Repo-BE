@@ -10,15 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:8080")
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/api")
 public class StudentController {
     @Autowired
     private IStudentService IStudentService;
 
     @RequestMapping(value = "/student-list",method = RequestMethod.GET)
-    public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(defaultValue = "") String find,
-                                                       @RequestParam(value = "page") Integer page){
+    public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
+                                                       @RequestParam(value = "page", defaultValue = "0") Integer page){
         Page<Student> listStudent = IStudentService.findAllStudent(find, PageRequest.of(page,4));
         if (listStudent.isEmpty()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -26,7 +26,7 @@ public class StudentController {
         return new ResponseEntity<>(listStudent, HttpStatus.OK);
     }
     @RequestMapping(value = "/student-list-teacher",method = RequestMethod.GET)
-    public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(defaultValue = "") String find,
+    public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
                                                        @RequestParam(value = "teacherId") Integer teacherId,
                                                        @RequestParam(value = "page") Integer page){
         Page<Student> listStudent = IStudentService.findAllStudent(find,teacherId, PageRequest.of(page,4));
@@ -35,5 +35,4 @@ public class StudentController {
         }
         return new ResponseEntity<>(listStudent, HttpStatus.OK);
     }
-
 }

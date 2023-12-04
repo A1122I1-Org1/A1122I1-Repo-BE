@@ -25,6 +25,7 @@ public interface IGroupAccountRepository extends JpaRepository<GroupAccount,Inte
 @Modifying
     @Query(value = "UPDATE `doanit`.`group_account` SET `status` = 1 WHERE (`group_account_id` = ?1);",nativeQuery = true)
         void acceptGroup(Integer groupId);
+
     @Modifying
     @Query(
             value = "update student  " +

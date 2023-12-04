@@ -33,6 +33,7 @@ public class GroupController {
                                          @RequestBody List<Integer> listIdStudent) {
         this.iGroupAccountService.deleteGroup(groupId, listIdStudent);
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
    @RequestMapping(value = "accept-group/{groupId}",method =RequestMethod.PATCH )

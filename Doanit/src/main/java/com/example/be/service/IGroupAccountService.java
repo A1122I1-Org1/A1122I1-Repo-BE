@@ -11,7 +11,6 @@ public interface IGroupAccountService {
     List<GroupAccount> findAll();
     Page<GroupAccount> listGroup(Pageable pageable);
     void deleteGroup(Integer groupId,List<Integer> integerList);
-
     void acceptGroup(Integer groupId);
     GroupAccount getGroupById(Integer groupid);
     void updateDeadLine(String date, Integer groupId);

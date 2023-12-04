@@ -1,18 +1,24 @@
 package com.example.be.validate;
 
 import com.example.be.dto.CreateUpdateStudentDTO;
+import com.example.be.dto.IStudentEditDTO;
+import com.example.be.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 @Component
 public class StudentValidator {
 
+    @Autowired
+    StudentRepository studentRepository;
     private final Pattern pattern_name=Pattern.compile("^[a-zA-Z\\s]+$");
     private final Pattern pattern_email=Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     private final Pattern pattern_phone=Pattern.compile("^[0-9]+$");
@@ -88,7 +94,16 @@ public class StudentValidator {
             }
         }
 
+        //validate duplicate
+        List<IStudentEditDTO> students=studentRepository.findStudentByPhone(createUpdateStudentDTO.getPhone());
+        if(!students.isEmpty()){
+            errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
+        }
 
+        students=studentRepository.findStudentByEmail(createUpdateStudentDTO.getEmail());
+        if(!students.isEmpty()){
+            errors.put("errorEmailDuplicate","Email đã tồn tại");
+        }
 
 
         return errors;

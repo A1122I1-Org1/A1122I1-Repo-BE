@@ -8,6 +8,7 @@ public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "notification_id") // Đặt tên cột tại đây
     private Integer notificationId;
 

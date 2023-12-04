@@ -9,8 +9,8 @@ public class InfoTopicRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "infor_topic_register_id")
-    private Integer inforTopicRegisterId;
+    @Column(name = "info_topic_register_id")
+    private Integer infoTopicRegisterId;
 
     // Kiểm tra xem đề tài đã được xét duyệt hay chưa.
     private Boolean status;
@@ -33,7 +33,7 @@ public class InfoTopicRegister {
     private GroupAccount groupAccount;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     private Teacher teacher;
 
     @OneToMany(mappedBy = "infoTopicRegister")
@@ -42,8 +42,9 @@ public class InfoTopicRegister {
     public InfoTopicRegister() {
     }
 
-    public InfoTopicRegister(Integer inforTopicRegisterId, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
-        this.inforTopicRegisterId = inforTopicRegisterId;
+
+    public InfoTopicRegister(Integer infoTopicRegisterId, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
+        this.infoTopicRegisterId = infoTopicRegisterId;
         this.status = status;
         this.statusComplete = statusComplete;
         this.topicCancel = topicCancel;
@@ -54,12 +55,12 @@ public class InfoTopicRegister {
         this.processList = processList;
     }
 
-    public Integer getInforTopicRegisterId() {
-        return inforTopicRegisterId;
+    public Integer getInfoTopicRegisterId() {
+        return infoTopicRegisterId;
     }
 
-    public void setInforTopicRegisterId(Integer id) {
-        this.inforTopicRegisterId = id;
+    public void setInfoTopicRegisterId(Integer infoTopicRegisterId) {
+        this.infoTopicRegisterId = infoTopicRegisterId;
     }
 
     public Boolean getStatus() {

@@ -8,7 +8,7 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="topic_id")
+    @Column(name = "topic_id")
     private Integer topicId;
 
     private String name;
@@ -22,7 +22,7 @@ public class Topic {
     private Boolean deleteFlag;
 
     @ManyToOne
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
     private Faculty faculty;
 
     public Topic() {
@@ -42,8 +42,8 @@ public class Topic {
         return topicId;
     }
 
-    public void setTopicId(Integer id) {
-        this.topicId = id;
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 
     public String getName() {

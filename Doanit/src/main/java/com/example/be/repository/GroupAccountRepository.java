@@ -24,7 +24,7 @@ public interface GroupAccountRepository extends JpaRepository<GroupAccount, Inte
     @Query(
             value = "update student " +
                     "set group_account_id = ?1 " +
-                    "where id = ?2",
+                    "where student_id = ?2",
             nativeQuery = true)
     void agreeJoinGroup(Integer groupId, Integer studentId);
     //find by name

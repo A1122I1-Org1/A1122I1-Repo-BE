@@ -8,19 +8,19 @@ import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "groupAccountId")
 @Entity
 @Table(name = "group_account")
 public class GroupAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="group_account_id")
+    @Column(name = "group_account_id")
     private Integer groupAccountId;
 
     private String name;
-    @Column(name="delete_flag")
-    private Boolean deleteFlag;
+
+    private Boolean delete_flag;
 
     private Boolean status;
 
@@ -36,15 +36,15 @@ public class GroupAccount {
     public GroupAccount() {
     }
 
-    public GroupAccount(String name, Boolean deleteFlag) {
+    public GroupAccount(String name, Boolean delete_flag) {
         this.name = name;
-        this.deleteFlag = deleteFlag;
+        this.delete_flag = delete_flag;
     }
 
-    public GroupAccount(Integer groupAccountId, String name, Boolean deleteFlag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
+    public GroupAccount(Integer groupAccountId, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
         this.groupAccountId = groupAccountId;
         this.name = name;
-        this.deleteFlag = deleteFlag;
+        this.delete_flag = delete_flag;
         this.status = status;
         this.date = date;
         this.studentList = studentList;
@@ -55,8 +55,16 @@ public class GroupAccount {
         return groupAccountId;
     }
 
-    public void setGroupAccountId(Integer id) {
-        this.groupAccountId = id;
+    public void setGroupAccountId(Integer groupAccountId) {
+        this.groupAccountId = groupAccountId;
+    }
+
+    public Boolean getDelete_flag() {
+        return delete_flag;
+    }
+
+    public Boolean getStatus() {
+        return status;
     }
 
     public String getName() {
@@ -68,11 +76,11 @@ public class GroupAccount {
     }
 
     public Boolean isDelete_flag() {
-        return deleteFlag;
+        return delete_flag;
     }
 
-    public void setDeleteFlag(Boolean delete_flag) {
-        this.deleteFlag = delete_flag;
+    public void setDelete_flag(Boolean delete_flag) {
+        this.delete_flag = delete_flag;
     }
 
     public Boolean isStatus() {

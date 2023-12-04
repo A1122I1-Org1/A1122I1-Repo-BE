@@ -75,8 +75,6 @@ public class StudentController {
      */
     @RequestMapping(value = "/create-student",method = RequestMethod.POST)
     public ResponseEntity<?> createStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
-
-
         if(studentDTO == null){
             return new ResponseEntity<CreateUpdateStudentDTO>(HttpStatus.BAD_REQUEST);
         }else{

@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors()// ngăn chặn request từ các domain khác
                 .and().csrf().disable()// tắt mặt định tấn công xác thực
                 .authorizeRequests()// phân quyền request
-                .antMatchers("/api/v1/auth/sign-in").permitAll()//Không cần xác thực
+                .antMatchers("/**").permitAll()//Không cần xác thực
                 .anyRequest().authenticated();
         //Thêm 1 lớp Filter kt jwt
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

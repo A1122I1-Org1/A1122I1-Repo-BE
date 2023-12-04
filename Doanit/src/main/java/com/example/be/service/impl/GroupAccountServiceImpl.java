@@ -1,6 +1,6 @@
 package com.example.be.service.impl;
 
-import com.example.be.dto.IAccountGroupDTO;
+
 import com.example.be.entity.GroupAccount;
 import com.example.be.repository.IGroupAccountRepository;
 import com.example.be.service.IGroupAccountService;
@@ -38,6 +38,7 @@ public class GroupAccountServiceImpl implements IGroupAccountService {
     public GroupAccount getGroupById(Integer id) {
         return null;
     }
+
 
     @Override
     public Page<GroupAccount> listGroup(Pageable pageable) {

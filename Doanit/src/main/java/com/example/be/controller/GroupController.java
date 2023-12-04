@@ -1,6 +1,6 @@
 package com.example.be.controller;
 
-import com.example.be.dto.IAccountGroupDTO;
+
 import com.example.be.entity.GroupAccount;
 import com.example.be.service.IGroupAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +24,7 @@ public class GroupController {
     public ResponseEntity<Page<GroupAccount>> listGroup(@RequestParam(value = "page") Integer page){
       Page<GroupAccount> listGroup=iGroupAccountService.listGroup(PageRequest.of(page,4));
       if (listGroup.isEmpty()){
+
           return new ResponseEntity<Page<GroupAccount>>(HttpStatus.BAD_REQUEST);
       }
        return  new ResponseEntity<Page<GroupAccount>>(listGroup,HttpStatus.OK);

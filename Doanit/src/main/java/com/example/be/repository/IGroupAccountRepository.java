@@ -1,6 +1,6 @@
 package com.example.be.repository;
 
-import com.example.be.dto.IAccountGroupDTO;
+
 import com.example.be.entity.GroupAccount;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +18,7 @@ public interface IGroupAccountRepository extends JpaRepository<GroupAccount,Inte
     @Query(
             value = "UPDATE `doanit`.`group_account` SET `delete_flag` = 1 WHERE (`group_account_id` = ?1);",nativeQuery = true
     ) void deleteGroup(Integer groupId);
+
 @Modifying
     @Query(
             value = "UPDATE `doanit`.`group_account` SET `date` = ?1 WHERE (`group_account_id` = ?2);",nativeQuery = true)

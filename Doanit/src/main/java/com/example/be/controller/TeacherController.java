@@ -1,2 +1,3 @@
-package com.example.be.controller;public class TeacherController {
+package com.example.be.controller;
+public class TeacherController {
 }

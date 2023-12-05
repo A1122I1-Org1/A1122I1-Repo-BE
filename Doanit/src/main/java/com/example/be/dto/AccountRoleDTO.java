@@ -1,4 +1,4 @@
-package com.codegym.dto;
+package com.example.be.dto;
 
 public class AccountRoleDTO {
     private Integer id;

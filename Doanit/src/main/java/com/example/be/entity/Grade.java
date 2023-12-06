@@ -8,29 +8,30 @@ public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "grade_id")
+    private Integer gradeId;
 
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
     private Faculty faculty;
 
     public Grade() {
     }
 
-    public Grade(Integer id, String name, Faculty faculty) {
-        this.id = id;
+    public Grade(Integer gradeId, String name, Faculty faculty) {
+        this.gradeId = gradeId;
         this.name = name;
         this.faculty = faculty;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getGradeId() {
+        return gradeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setGradeId(Integer gradeId) {
+        this.gradeId = gradeId;
     }
 
     public String getName() {
@@ -48,4 +49,5 @@ public class Grade {
     public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
+
 }

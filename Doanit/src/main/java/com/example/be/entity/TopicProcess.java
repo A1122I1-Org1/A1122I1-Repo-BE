@@ -3,9 +3,7 @@ package com.example.be.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "id")
+
 
 @Entity
 @Table(name = "topic_process")
@@ -13,7 +11,8 @@ public class TopicProcess {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "topic_process_id")
+    private Integer topicProcessId;
 
     @Column(columnDefinition = "DATE")
     private String dateStart;
@@ -29,14 +28,14 @@ public class TopicProcess {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "info_topic_register", referencedColumnName = "id")
+    @JoinColumn(name = "info_topic_register_id", referencedColumnName = "info_topic_register_id")
     private InfoTopicRegister infoTopicRegister;
 
     public TopicProcess() {
     }
 
-    public TopicProcess(Integer id, String dateStart, String dateEnd, Boolean status, Integer processNumber, Integer percentProcess, InfoTopicRegister infoTopicRegister) {
-        this.id = id;
+    public TopicProcess(Integer topicProcessId, String dateStart, String dateEnd, Boolean status, Integer processNumber, Integer percentProcess, InfoTopicRegister infoTopicRegister) {
+        this.topicProcessId = topicProcessId;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.status = status;
@@ -45,12 +44,12 @@ public class TopicProcess {
         this.infoTopicRegister = infoTopicRegister;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getTopicProcessId() {
+        return topicProcessId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTopicProcessId(Integer topicProcessId) {
+        this.topicProcessId = topicProcessId;
     }
 
     public String getDateStart() {

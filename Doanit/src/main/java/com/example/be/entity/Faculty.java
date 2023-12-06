@@ -11,7 +11,8 @@ public class Faculty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "faculty_id")
+    private Integer facultyId;
 
     private String name;
 
@@ -19,21 +20,22 @@ public class Faculty {
     @OneToMany(mappedBy = "faculty")
     private List<Topic> topicList;
 
+
     public Faculty() {
     }
 
-    public Faculty(Integer id, String name, List<Topic> topicList) {
-        this.id = id;
+    public Faculty(Integer facultyId, String name, List<Topic> topicList) {
+        this.facultyId = facultyId;
         this.name = name;
         this.topicList = topicList;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getFacultyId() {
+        return facultyId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFacultyId(Integer facultyId) {
+        this.facultyId = facultyId;
     }
 
     public String getName() {

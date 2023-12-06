@@ -9,7 +9,8 @@ public class InfoTopicRegister {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "info_topic_register_id")
+    private Integer infoTopicRegisterId;
 
     // Kiểm tra xem đề tài đã được xét duyệt hay chưa.
     private Boolean status;
@@ -24,15 +25,15 @@ public class InfoTopicRegister {
     private String descriptionURL;
 
     @ManyToOne
-    @JoinColumn(name = "topic_id", referencedColumnName = "id")
+    @JoinColumn(name = "topic_id", referencedColumnName = "topic_id")
     private Topic topic;
 
     @ManyToOne
-    @JoinColumn(name = "group_account_id", referencedColumnName = "id")
+    @JoinColumn(name = "group_account_id", referencedColumnName = "group_account_id")
     private GroupAccount groupAccount;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     private Teacher teacher;
 
     @OneToMany(mappedBy = "infoTopicRegister")
@@ -41,8 +42,9 @@ public class InfoTopicRegister {
     public InfoTopicRegister() {
     }
 
-    public InfoTopicRegister(Integer id, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
-        this.id = id;
+
+    public InfoTopicRegister(Integer infoTopicRegisterId, Boolean status, Boolean statusComplete, Boolean topicCancel, String descriptionURL, Topic topic, GroupAccount groupAccount, Teacher teacher, List<TopicProcess> processList) {
+        this.infoTopicRegisterId = infoTopicRegisterId;
         this.status = status;
         this.statusComplete = statusComplete;
         this.topicCancel = topicCancel;
@@ -53,12 +55,12 @@ public class InfoTopicRegister {
         this.processList = processList;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getInfoTopicRegisterId() {
+        return infoTopicRegisterId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setInfoTopicRegisterId(Integer infoTopicRegisterId) {
+        this.infoTopicRegisterId = infoTopicRegisterId;
     }
 
     public Boolean getStatus() {

@@ -1,3 +1,2 @@
-package com.example.be.dto;
-public interface ITeacherUpdateDTO {
+package com.example.be.dto;public interface ITeacherUpdateDTO {
 }

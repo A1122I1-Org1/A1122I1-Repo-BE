@@ -8,7 +8,7 @@ import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "group_account_id")
+        property = "groupAccountId")
 @Entity
 @Table(name = "group_account")
 public class GroupAccount {
@@ -36,31 +36,12 @@ public class GroupAccount {
     public GroupAccount() {
     }
 
-
-    public GroupAccount(Integer groupAccountId, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
-        this.groupAccountId = groupAccountId;
-        this.name = name;
-        this.delete_flag = delete_flag;
-        this.status = status;
-        this.date = date;
-        this.studentList = studentList;
-        this.infoTopicRegisterList = infoTopicRegisterList;
-    }
-
     public Integer getGroupAccountId() {
         return groupAccountId;
     }
 
     public void setGroupAccountId(Integer groupAccountId) {
         this.groupAccountId = groupAccountId;
-    }
-
-    public Boolean getDelete_flag() {
-        return delete_flag;
-    }
-
-    public Boolean getStatus() {
-        return status;
     }
 
     public String getName() {
@@ -71,7 +52,7 @@ public class GroupAccount {
         this.name = name;
     }
 
-    public Boolean isDelete_flag() {
+    public Boolean getDelete_flag() {
         return delete_flag;
     }
 
@@ -79,7 +60,7 @@ public class GroupAccount {
         this.delete_flag = delete_flag;
     }
 
-    public Boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 

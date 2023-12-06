@@ -1,15 +1,19 @@
 package com.example.be.service;
 
-import com.example.be.entity.Topic;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.example.be.dto.InfoTopicRegisterDTO;
+import com.example.be.dto.TopicProcessDTO;
 
-import java.util.List;
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 
 public interface ITopicManagerService {
-    Page<Topic> findAllTopic(Pageable pageable);
+    void topicCancel(Integer id);
 
-    Page<Topic> findAllTopicBy(String name, Pageable pageable);
+    void deleteTopic(Integer id);
 
-    Topic findByIdTopic(Integer id);
+    void createTopicProcess(TopicProcessDTO topicProcessDTO);
+
+    void statusInfo(Integer teacherId, Integer id);
+
+    void sendStudent(InfoTopicRegisterDTO infoTopicRegisterDTO) throws MessagingException, UnsupportedEncodingException;
 }

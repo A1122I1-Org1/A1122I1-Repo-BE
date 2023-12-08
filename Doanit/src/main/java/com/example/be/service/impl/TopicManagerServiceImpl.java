@@ -19,8 +19,8 @@ public class TopicManagerServiceImpl implements ITopicManagerService {
     }
 
     @Override
-    public Page<Topic> findAllTopicBy(String name, Pageable pageable) {
-        return topicManagerRepository.findAllTopicBy(false, name, pageable);
+    public Page<Topic> findAllTopicByName(String name, Pageable pageable) {
+        return topicManagerRepository.findAllTopicByName(false, name, pageable);
     }
 
     @Override

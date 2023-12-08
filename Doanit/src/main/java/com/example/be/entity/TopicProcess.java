@@ -3,9 +3,7 @@ package com.example.be.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-//@JsonIdentityInfo(
-//        generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property = "id")
+
 
 @Entity
 @Table(name = "topic_process")

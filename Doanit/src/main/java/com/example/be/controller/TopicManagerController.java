@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class TopicManagerController {
     @Autowired
     ITopicManagerService topicManagerService;
+
     @RequestMapping(value = "/topic", method = RequestMethod.GET, params = {"page", "size"})
     public ResponseEntity<Page<Topic>> pageTopic(@RequestParam("page") int page,
                                                  @RequestParam("size") int size) {

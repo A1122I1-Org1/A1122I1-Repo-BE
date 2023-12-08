@@ -9,7 +9,6 @@ import javax.transaction.Transactional;
 
 
 @Transactional
-
 public interface IAccountService {
 
     Account findByUsername(String username);

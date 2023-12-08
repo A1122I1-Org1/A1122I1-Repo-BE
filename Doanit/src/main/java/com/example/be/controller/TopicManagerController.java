@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class TopicManagerController {
     @Autowired
     ITopicManagerService topicManagerService;
-
     @PreAuthorize("hasRole('TEACHER')" )
     @RequestMapping(value = "/topic", method = RequestMethod.GET)
     public ResponseEntity<Page<Topic>> pageTopic(

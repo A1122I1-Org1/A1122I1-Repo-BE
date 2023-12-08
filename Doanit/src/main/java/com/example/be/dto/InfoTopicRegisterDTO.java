@@ -2,10 +2,8 @@ package com.example.be.dto;
 
 import com.example.be.entity.Topic;
 
-import java.util.List;
-
 public class InfoTopicRegisterDTO {
-    private Integer id;
+    private Integer infoTopicResgitor;
     private Topic topic;
     private Integer groupAccountId;
 
@@ -17,12 +15,12 @@ public class InfoTopicRegisterDTO {
     public InfoTopicRegisterDTO() {
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getInfoTopicResgitor() {
+        return infoTopicResgitor;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setInfoTopicResgitor(Integer infoTopicResgitor) {
+        this.infoTopicResgitor = infoTopicResgitor;
     }
     public Topic getTopic() {
         return topic;

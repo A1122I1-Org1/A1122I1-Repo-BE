@@ -1,11 +1,11 @@
 package com.example.be.dto;
 
 public class GroupAccountDTO {
-    Integer id;
+    Integer groupaccountId;
     String name;
 
     public GroupAccountDTO(Integer id, String name) {
-        this.id = id;
+        this.groupaccountId = id;
         this.name = name;
     }
 
@@ -13,11 +13,11 @@ public class GroupAccountDTO {
     }
 
     public Integer getId() {
-        return id;
+        return groupaccountId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.groupaccountId = id;
     }
 
     public String getName() {

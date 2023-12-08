@@ -1,5 +1,4 @@
 package com.example.be.dto;
-
 public interface ITeacherUpdateDTO {
     Integer getTeacherId();
     String getAddress();

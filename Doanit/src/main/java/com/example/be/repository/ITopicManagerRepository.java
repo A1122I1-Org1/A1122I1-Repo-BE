@@ -14,13 +14,21 @@ import javax.transaction.Transactional;
 @Repository
 public interface ITopicManagerRepository extends JpaRepository<Topic, Integer> {
 
-    @Query(value = "SELECT topic_id, content, delete_flag, image, introduce, name, faculty_id FROM doanit.topic ", nativeQuery = true)
+    @Query(value = "SELECT t.topic_id, t.content, t.delete_flag, t.image, t.introduce, t.faculty_id, t.name , f.name AS faculty_name " +
+            "FROM doanit.topic t " +
+            "JOIN doanit.faculty f ON t.faculty_id = f.faculty_id", nativeQuery = true)
     Page<Topic> findAllTopic(Pageable pageable);
 
-    @Query(value = "SELECT topic_id, content, delete_flag, image, introduce, name, faculty_id FROM doanit.topic where delete_flag = ?1 and topic.name like %?2%", nativeQuery = true)
-    Page<Topic> findAllTopicBy(Boolean delete , String name, Pageable pageable);
+    @Query(value = "SELECT t.topic_id, t.content, t.delete_flag, t.image, t.introduce, t.faculty_id, t.name , f.name AS faculty_name " +
+            "FROM doanit.topic t " +
+            "JOIN doanit.faculty f ON t.faculty_id = f.faculty_id" +
+            " WHERE t.delete_flag = ?1 AND t.name LIKE CONCAT('%', ?2, '%')", nativeQuery = true)
+    Page<Topic> findAllTopicByName(Boolean delete , String name, Pageable pageable);
 
-    @Query(value = "SELECT topic_id, content, delete_flag, image, introduce, name, faculty_id FROM doanit.topic where topic.topic_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT t.topic_id, t.content, t.delete_flag, t.image, t.introduce, t.faculty_id, t.name , f.name AS faculty_name " +
+            "FROM doanit.topic t " +
+            "JOIN doanit.faculty f ON t.faculty_id = f.faculty_id" +
+            " WHERE t.topic_id = ?1", nativeQuery = true)
     Topic findByIdTopic(Integer id);
 
     @Modifying

@@ -2,15 +2,10 @@ package com.example.be.config;
 
 import com.example.be.jwt.JwtAuthenticationFilter;
 import com.example.be.security.UserPrincipleService;
-import com.example.be.service.IAccountService;
-
-import com.example.be.service.impl.AccountServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,13 +13,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configurable//đánh dấu đây là class có các phương thức tạo ra Bean component.
-@EnableWebSecurity// đây là class cấu hình cho Spring Security
-@EnableMethodSecurity//  kích hoạt cả 3 cách phân quyền @PreAuthorize @PostAuthorize//@RolesAllowed vs. @PreAuthorize vs. @Secured
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    UserPrincipleService userPrincipleService;
+    private final UserPrincipleService userPrincipleService;
+
+    public WebSecurityConfig(UserPrincipleService userPrincipleService) {
+        this.userPrincipleService = userPrincipleService;
+    }
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -33,43 +30,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //Xác thực
+    // Authentication
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userPrincipleService)//cung cấp userPrincipleService cho spring security
-                .passwordEncoder(passwordEncoder());// cung cấp password
+        auth.userDetailsService(userPrincipleService)
+                .passwordEncoder(passwordEncoder());
     }
-    //Phân quyền
+
+    // Authorization
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors()// ngăn chặn request từ các domain khác
-                .and().csrf().disable()// tắt mặt định tấn công xác thực
-                .authorizeRequests()// phân quyền request
-                .antMatchers("/**").permitAll()//Không cần xác thực
+        httpSecurity.cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/v1/auth/sign-in").permitAll()
+                .antMatchers("/api/v1/users/**").hasRole("USER")
+                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/public/topic-manager/topic").permitAll() // Đường dẫn cho phương thức pageTopic
+                .antMatchers("/api/public/topic-manager/topic-search").permitAll() // Đường dẫn cho phương thức pageTopicFind
+                .antMatchers("/api/public/topic-manager/findById/{id}").permitAll() // Đường dẫn cho phương thức findTopicById
+                .antMatchers("/notification/{id}").permitAll() // Đường dẫn cho phương thức getListNotification
+                .antMatchers("/seen-notification/{id}").permitAll() // Đường dẫn cho phương thức seenNotification
                 .anyRequest().authenticated();
-        //Thêm 1 lớp Filter kt jwt
+
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-   /* @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors()// ngăn chặn request từ các domain khác
-                .and().csrf().disable()// tắt mặt định tấn công xác thực
-                .authorizeRequests()// phân quyền request
-                .antMatchers("/api/v1/auth/sign-in").permitAll()//Không cần xác thực
-                .antMatchers("/api/v1/users/**").hasRole("USER")
-                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated();
-        //Thêm 1 lớp Filter kt jwt
-        httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
-*/
 }

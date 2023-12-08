@@ -15,6 +15,8 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+
     @Override
     public void createTeacher(CreateUpdateTeacherDTO createUpdateTeacherDTO) {
         teacherRepository.createTeacher(createUpdateTeacherDTO.getAddress(),createUpdateTeacherDTO.getAvatar(), createUpdateTeacherDTO.getDateOfBirth(), createUpdateTeacherDTO.getEmail(), createUpdateTeacherDTO.getName(), createUpdateTeacherDTO.getPhone(),createUpdateTeacherDTO.getDegreeId(),createUpdateTeacherDTO.getFacultyId(),createUpdateTeacherDTO.getGender(),createUpdateTeacherDTO.getAccountId());

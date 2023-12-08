@@ -49,14 +49,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Authorization
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors()
-                .and().csrf().disable()
+        httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/sign-in").permitAll()
                 .antMatchers("/api/v1/users/**").hasRole("USER")
                 .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/public/topic-manager/topic").permitAll() // Đường dẫn cho phương thức pageTopic
+                .antMatchers("/api/public/topic-manager/topic-search").permitAll() // Đường dẫn cho phương thức pageTopicFind
+                .antMatchers("/api/public/topic-manager/findById/{id}").permitAll() // Đường dẫn cho phương thức findTopicById
+                .antMatchers("/notification/{id}").permitAll() // Đường dẫn cho phương thức getListNotification
+                .antMatchers("/seen-notification/{id}").permitAll() // Đường dẫn cho phương thức seenNotification
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
+
 }

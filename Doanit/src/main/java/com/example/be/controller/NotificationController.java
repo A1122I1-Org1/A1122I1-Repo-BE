@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ public class NotificationController {
     @Autowired
     private INotificationService notificationService;
 
+    @PreAuthorize("hasRole('STUDENT')" )
     @GetMapping("/notification/{id}")
     private ResponseEntity<?> getListNotification(@PathVariable Integer id,
                                                   @PageableDefault(size = 5) Pageable pageable) {
@@ -30,6 +32,7 @@ public class NotificationController {
         return new ResponseEntity<>(notificationList, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('STUDENT')" )
     @GetMapping("/seen-notification/{id}")
     private ResponseEntity<?> seenNotification(@PathVariable Integer id,
                                                @PageableDefault(size = 5) Pageable pageable) {

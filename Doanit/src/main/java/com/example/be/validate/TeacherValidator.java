@@ -81,7 +81,7 @@ public class TeacherValidator {
         if (createUpdateTeacherDTO.getAvatar() != null && !createUpdateTeacherDTO.getAvatar().isEmpty()) {
             String[] allowedExtensions = {"jpg", "png", "jpeg"};
             String extension = createUpdateTeacherDTO.getAvatar().substring(createUpdateTeacherDTO.getAvatar().lastIndexOf(".") + 1);
-            if (!Arrays.asList(allowedExtensions).contains(extension)) {
+            if (!Arrays.asList(allowedExtensions).contains(extension.toLowerCase())) {
                 errors.put("errorFileFormat","File ảnh không đúng định dạng");
             }
 

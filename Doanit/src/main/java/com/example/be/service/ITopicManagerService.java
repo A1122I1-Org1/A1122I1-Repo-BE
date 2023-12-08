@@ -9,7 +9,7 @@ import java.util.List;
 public interface ITopicManagerService {
     Page<Topic> findAllTopic(Pageable pageable);
 
-    Page<Topic> findAllTopicBy(String name, Pageable pageable);
+    Page<Topic> findAllTopicByName(String name, Pageable pageable);
 
     Topic findByIdTopic(Integer id);
 }

@@ -19,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class StudentController {
     @Autowired
     StudentValidator studentValidator;
 
+    @PreAuthorize("hasRole('ADMIN')" )
     @RequestMapping(value = "/student-list",method = RequestMethod.GET)
     public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
                                                        @RequestParam(value = "page", defaultValue = "0") Integer page){
@@ -51,6 +53,7 @@ public class StudentController {
         }
         return new ResponseEntity<>(listStudent, HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('TEACHER')" )
     @RequestMapping(value = "/student-list-teacher",method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getAllStudentWithTeacher(@RequestParam(value = "find",defaultValue = "") String find,
                                                        @RequestParam(value = "page", defaultValue = "0") Integer page){

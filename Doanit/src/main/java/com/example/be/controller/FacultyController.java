@@ -5,6 +5,7 @@ import com.example.be.service.IFacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ public class FacultyController {
     /**
      * Find all faculty
      */
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')" )
     @RequestMapping(value = "/get-all-faculty", method = RequestMethod.GET)
     public ResponseEntity<List<Faculty>> getAllFaculty(){
         List<Faculty> listFaculty = iFacultyService.getAllFaculty();

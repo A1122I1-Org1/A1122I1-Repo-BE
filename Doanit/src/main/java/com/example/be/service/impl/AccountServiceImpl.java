@@ -2,7 +2,7 @@ package com.example.be.service.impl;
 
 
 import com.example.be.entity.Account;
-import com.example.be.repository.AccountRepository;
+import com.example.be.repository.IAccountRepository;
 import com.example.be.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements IAccountService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     @Override
     public Account findByUsername(String username) {
@@ -26,7 +26,7 @@ public class AccountServiceImpl implements IAccountService {
 
     @Override
     public void changePassword(Account account) {
-        accountRepository.save(account);
+        accountRepository.changePassword(account.getUsername(),account.getPassword());
     }
 
     @Override

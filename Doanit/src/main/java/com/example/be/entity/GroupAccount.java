@@ -36,6 +36,10 @@ public class GroupAccount {
     public GroupAccount() {
     }
 
+    public GroupAccount(String name, Boolean delete_flag) {
+        this.name = name;
+        this.delete_flag = delete_flag;
+    }
 
     public GroupAccount(Integer groupAccountId, String name, Boolean delete_flag, Boolean status, String date, List<Student> studentList, List<InfoTopicRegister> infoTopicRegisterList) {
         this.groupAccountId = groupAccountId;

@@ -23,6 +23,7 @@ public class Account {
     @JsonIgnore
     //Khi serialize trường password sẽ không được bao gồm trong chuỗi JSON kết quả
     private String password;
+
     //    @ManyToMany(fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
 //    @JoinTable(name = "account_role",
@@ -38,6 +39,8 @@ public class Account {
 
     public Account() {
     }
+
+
 
     public Integer getAccountId() {
         return accountId;
@@ -87,3 +90,4 @@ public class Account {
         this.student = student;
     }
 }
+

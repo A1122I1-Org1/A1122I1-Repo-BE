@@ -1,7 +1,10 @@
 package com.example.be.repository;
 
+import com.example.be.dto.ITeacherDto;
 import com.example.be.dto.ITeacherUpdateDTO;
 import com.example.be.entity.Teacher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -40,6 +43,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
     List<ITeacherUpdateDTO> getTeacherByPhone(String phone);
 
 
+
     @Query(value = "select teacher.teacher_id as teacherId, teacher.address as address, teacher.avatar as avatar, teacher.date_of_birth as dateOfBirth," +
             "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
             "teacher.gender as gender from teacher where (teacher.phone = ?2 and teacher.phone != ?1) and teacher.delete_flag = true", nativeQuery = true)
@@ -49,5 +53,22 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
             "teacher.email as email, teacher.name as name, teacher.phone as phone, teacher.degree_id as degree_id, teacher.faculty_id as faculty_id," +
             "teacher.gender as gender from teacher where (teacher.email = ?2 and teacher.email != ?1) and teacher.delete_flag = true", nativeQuery = true)
     List<ITeacherUpdateDTO> getTeacherByEmailUpdate(String oldEmail, String newEmail);
+
+
+    @Query(value = "SELECT  t.teacher_id As teacherId, t.name AS teacherName, t.email, t.phone, t.avatar, f.name AS facultyName \n" +
+            "FROM teacher t\n" +
+            "JOIN faculty f ON t.faculty_id = f.faculty_id\n" +
+            "where concat('MGV-',t.teacher_id,\n" +
+            "  ifnull(t.phone,''),\n" +
+            "  ifnull(t.email,''),\n" +
+            "  ifnull(t.name,''),\n" +
+            "  f.name\n) " +
+            "like concat('%', :find, '%')\n" +
+            "and t.delete_flag = 1" ,nativeQuery = true)
+    Page<ITeacherDto> getAllTeacher(String find, Pageable pageable);
+
+    @Modifying
+    @Query(value = "update teacher set teacher.delete_flag = 0 where teacher.teacher_id = ?1",nativeQuery = true)
+    void deleteTeacher(Integer id);
 
 }

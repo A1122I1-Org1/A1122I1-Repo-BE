@@ -35,6 +35,7 @@ public class AccountRole {
         return accountRoleId;
     }
 
+
     public void setAccountRoleId(Integer accountRoleId) {
         this.accountRoleId = accountRoleId;
     }
@@ -54,4 +55,6 @@ public class AccountRole {
     public void setRole(Role role) {
         this.role = role;
     }
+
 }
+

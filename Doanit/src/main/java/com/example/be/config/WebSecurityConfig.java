@@ -51,9 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/auth/sign-in").permitAll()
-                .antMatchers("/api/v1/users/**").hasRole("USER")
-                .antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/auth/sign-in").permitAll()
+                .antMatchers("/api/users/**").hasRole("USER")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .antMatchers("/api/public/topic-manager/topic").permitAll() // Đường dẫn cho phương thức pageTopic
                 .antMatchers("/api/public/topic-manager/topic-search").permitAll() // Đường dẫn cho phương thức pageTopicFind
                 .antMatchers("/api/public/topic-manager/findById/{id}").permitAll() // Đường dẫn cho phương thức findTopicById

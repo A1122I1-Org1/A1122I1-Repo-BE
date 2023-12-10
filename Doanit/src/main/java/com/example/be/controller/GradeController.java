@@ -16,8 +16,6 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
-//@PreAuthorize("hasRole('ADMIN')" )
-
 public class GradeController {
     @Autowired
     IGradeService iGradeService;
@@ -26,6 +24,7 @@ public class GradeController {
     /**
      * Find all grade
      */
+    @PreAuthorize("hasRole('ADMIN')" )
     @RequestMapping(value = "/get-all-grade", method = RequestMethod.GET)
     public ResponseEntity<List<Grade>> getAllGrade(){
         List<Grade> listGrade = iGradeService.getAllGrade();

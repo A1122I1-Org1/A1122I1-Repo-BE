@@ -5,7 +5,7 @@ import com.example.be.entity.Topic;
 public class InfoTopicRegisterDTO {
     private Integer infoTopicResgitor;
     private Topic topic;
-    private Integer groupAccountId;
+
 
 
 
@@ -30,13 +30,6 @@ public class InfoTopicRegisterDTO {
         this.topic = topic;
     }
 
-    public Integer getGroupAccountId() {
-        return groupAccountId;
-    }
-
-    public void setGroupAccountId(Integer groupAccountId) {
-        this.groupAccountId = groupAccountId;
-    }
 
 
 

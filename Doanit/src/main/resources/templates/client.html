@@ -1,0 +1,58 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Mail</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Thư mời gia nhập nhóm</h2>-->
+<!--<p>Chào bạn, đây là tin nhắn tự động được gửi từ hệ thống </p>-->
+<!--<p th:text="${'xin chào bạn '+ username}"></p>-->
+<!--<p>Bạn có một lời mời gia nhập nhóm.</p>-->
+<!--<a href="https://www.youtube.com/watch?v=KyXKGurjX_4"><button type="button" class="btn btn-primary">Click vô đây thử nha</button></a>-->
+<!--&lt;!&ndash;<a th:href="http://localhost:8080/api/Group/joinGroup?studentID=2&groupId=2"></a>&ndash;&gt;-->
+<!--<a th:href="${'http://localhost:8080/api/Group/joinGroup?studentID='+idStudent+'&groupId='+idGroup}"><button class="btn btn-success">Đồng ý</button></a>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #007bff; /* Màu chữ cho tiêu đề */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>Thư mời gia nhập nhóm</h2>
+<p>Chào bạn, đây là tin nhắn tự động được gửi từ hệ thống </p>
+<p th:text="${'xin chào bạn '+ username}"></p>
+<p>Bạn có một lời mời gia nhập nhóm.</p>
+<a href="https://www.youtube.com/watch?v=KyXKGurjX_4"><button type="button" class="btn btn-primary">Click vô đây thử nha</button></a>
+<!--<a th:href="http://localhost:8080/api/Group/joinGroup?studentID=2&groupId=2"></a>-->
+<a th:href="${'http://localhost:8080/api/Group/joinGroup?studentID='+idStudent+'&groupId='+idGroup}"><button class="btn btn-success">Đồng ý</button></a>
+</body>
+</html>

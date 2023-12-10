@@ -1,6 +1,5 @@
 package com.example.be.validate;
 
-
 import com.example.be.dto.CreateUpdateTeacherDTO;
 import com.example.be.dto.ITeacherUpdateDTO;
 import com.example.be.repository.TeacherRepository;
@@ -9,15 +8,17 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @Component
-public class TeacherValidator {
-
+public class TeacherValidatorUpdate {
     @Autowired
     private TeacherRepository teacherRepository;
-    
+
     private final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
     private final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
     private final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
@@ -66,16 +67,16 @@ public class TeacherValidator {
             errors.put("errorEmailFormat","Email không hợp lệ");
         }
 
+        ITeacherUpdateDTO teacherUpdateDTO = teacherRepository.getTeacherById(createUpdateTeacherDTO.getTeacherId());
+        List<ITeacherUpdateDTO> teachers = teacherRepository.getTeacherByPhoneUpdate(teacherUpdateDTO.getPhone(),createUpdateTeacherDTO.getPhone());
+        if (!teachers.isEmpty()) {
+            errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
+        }
 
-            List<ITeacherUpdateDTO> teachers = teacherRepository.getTeacherByPhone(createUpdateTeacherDTO.getPhone());
-            if (!teachers.isEmpty()) {
-                errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
-            }
-
-            teachers = teacherRepository.getTeacherByEmail(createUpdateTeacherDTO.getEmail());
-            if (!teachers.isEmpty()) {
-                errors.put("errorEmailDuplicate","Email đã tồn tại");
-            }
+        teachers = teacherRepository.getTeacherByEmailUpdate(teacherUpdateDTO.getEmail(),createUpdateTeacherDTO.getEmail());
+        if (!teachers.isEmpty()) {
+            errors.put("errorEmailDuplicate","Email đã tồn tại");
+        }
 
 
         if (createUpdateTeacherDTO.getAvatar() != null && !createUpdateTeacherDTO.getAvatar().isEmpty()) {

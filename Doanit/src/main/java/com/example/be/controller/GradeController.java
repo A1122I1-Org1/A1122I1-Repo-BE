@@ -24,7 +24,7 @@ public class GradeController {
     /**
      * Find all grade
      */
-    @PreAuthorize("hasRole('ADMIN')" )
+    @PreAuthorize("hasAnyRole('TEACHER','ADMIN')" )
     @RequestMapping(value = "/get-all-grade", method = RequestMethod.GET)
     public ResponseEntity<List<Grade>> getAllGrade(){
         List<Grade> listGrade = iGradeService.getAllGrade();

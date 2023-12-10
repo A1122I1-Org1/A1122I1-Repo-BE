@@ -10,11 +10,13 @@ import com.example.be.service.IAccountService;
 import com.example.be.service.IStudentService;
 import com.example.be.service.impl.AccountServiceImpl;
 import com.example.be.validate.StudentValidator;
+import com.example.be.validate.StudentValidatorUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -22,6 +24,8 @@ import java.util.Map;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
+//@PreAuthorize("hasRole('ADMIN')" )
+
 public class StudentController {
     @Autowired
     private IStudentService IStudentService;
@@ -33,6 +37,9 @@ public class StudentController {
 
     @Autowired
     StudentValidator studentValidator;
+
+    @Autowired
+    StudentValidatorUpdate studentValidatorUpdate;
 
     @RequestMapping(value = "/student-list",method = RequestMethod.GET)
     public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
@@ -61,7 +68,7 @@ public class StudentController {
      */
     @RequestMapping(value = "/edit-student", method = RequestMethod.PUT)
     public ResponseEntity<?> editStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
-        Map<String,String> errors  = studentValidator.validate(studentDTO);
+        Map<String,String> errors  = studentValidatorUpdate.validate(studentDTO);
         if(errors.isEmpty()){
             IStudentService.editStudent(studentDTO);
             return new ResponseEntity<CreateUpdateStudentDTO>(studentDTO,HttpStatus.OK);

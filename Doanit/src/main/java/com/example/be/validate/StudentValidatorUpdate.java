@@ -15,8 +15,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 @Component
-public class StudentValidator {
-
+public class StudentValidatorUpdate {
     @Autowired
     StudentRepository studentRepository;
     private final Pattern pattern_name=Pattern.compile("^[a-zA-Z\\s]+$");
@@ -94,20 +93,6 @@ public class StudentValidator {
             }
         }
 
-        //validate duplicate
-            List<IStudentEditDTO> students = studentRepository.findStudentByPhone(createUpdateStudentDTO.getPhone());
-            if (!students.isEmpty()) {
-                errors.put("errorPhoneDuplicate", "Số điện thoại đã tồn tại");
-            }
-
-            students = studentRepository.findStudentByEmail(createUpdateStudentDTO.getEmail());
-            if (!students.isEmpty()) {
-                errors.put("errorEmailDuplicate", "Email đã tồn tại");
-            }
-
-
-
         return errors;
     }
-
 }

@@ -38,9 +38,9 @@ public interface ITopicManagerRepository extends JpaRepository<Topic, Integer> {
     @Modifying
     @Query(value = "INSERT INTO `doanit`.`topic_process` (" +
             "`date_end`, `date_start`, `percent_process`, " +
-            "`process_number`, `status`, `info_topic_register`) " +
+            "`process_number`, `status`, `info_topic_register_id`) " +
             "VALUES (?1, ?2, ?3, ?4, ?5, ?6) " ,nativeQuery = true)
-    void createTopicProcess(String dateEnd, String dateStart, Integer percentProcess,
+    void createTopicProcess(String dateStart, String dateEnd, Integer percentProcess,
                             Integer processNumber, Boolean status, Integer infoTopicRegister);
 
     @Modifying

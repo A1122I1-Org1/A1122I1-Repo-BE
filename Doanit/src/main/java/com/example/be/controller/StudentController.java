@@ -14,6 +14,7 @@ import com.example.be.service.IAccountService;
 import com.example.be.service.IStudentService;
 import com.example.be.service.impl.AccountServiceImpl;
 import com.example.be.validate.StudentValidator;
+import com.example.be.validate.StudentValidatorUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +44,10 @@ public class StudentController {
     @Autowired
     StudentValidator studentValidator;
 
-    @PreAuthorize("hasRole('ADMIN')" )
+    @Autowired
+    StudentValidatorUpdate studentValidatorUpdate;
+
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/student-list",method = RequestMethod.GET)
     public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
                                                        @RequestParam(value = "page", defaultValue = "0") Integer page){
@@ -73,9 +77,10 @@ public class StudentController {
      * KhoaHND
      * Edit Student
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit-student", method = RequestMethod.PUT)
     public ResponseEntity<?> editStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
-        Map<String,String> errors  = studentValidator.validate(studentDTO);
+        Map<String,String> errors  = studentValidatorUpdate.validate(studentDTO);
         if(errors.isEmpty()){
             IStudentService.editStudent(studentDTO);
             return new ResponseEntity<CreateUpdateStudentDTO>(studentDTO,HttpStatus.OK);
@@ -87,6 +92,7 @@ public class StudentController {
      * KhoaHND
      * create Student
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/create-student",method = RequestMethod.POST)
     public ResponseEntity<?> createStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
         if(studentDTO == null){
@@ -117,6 +123,7 @@ public class StudentController {
      * KhoaHND
      * Find Student By Id
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/get-student-by-studentId/{studentId}", method = RequestMethod.GET)
     public ResponseEntity<IStudentEditDTO> findStudentById(@PathVariable Integer studentId){
         IStudentEditDTO student = IStudentService.findStudentByStudentId(studentId);

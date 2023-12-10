@@ -9,10 +9,8 @@ public interface IStudentEditDTO {
     String getAddress();
     String getPhone();
     String getEmail();
-    String getImage();
+    String getAvatar();
     Integer getGrade();
-
-    @Value("#{target.gender == 1}")
     Boolean getGender();
 }
 

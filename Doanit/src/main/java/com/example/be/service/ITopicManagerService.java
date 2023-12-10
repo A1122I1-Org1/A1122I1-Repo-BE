@@ -1,9 +1,13 @@
 package com.example.be.service;
 
+import com.example.be.dto.InfoTopicRegisterDTO;
+import com.example.be.dto.TopicProcessDTO;
 import com.example.be.entity.Topic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public interface ITopicManagerService {
@@ -12,4 +16,12 @@ public interface ITopicManagerService {
     Page<Topic> findAllTopicByName(String name, Pageable pageable);
 
     Topic findByIdTopic(Integer id);
+
+    void sendStudent(InfoTopicRegisterDTO infoTopicRegisterDTO) throws MessagingException, UnsupportedEncodingException;
+
+    void createTopicProcess(TopicProcessDTO topicProcessDTO);
+
+    void deleteTopic(Integer id);
+
+    void topicCancel(Integer id);
 }

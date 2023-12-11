@@ -102,7 +102,7 @@ public class StudentController {
             if(errors.isEmpty()){
                 Account account = new Account();
                 account.setUsername(studentDTO.getEmail());
-                account.setPassword("123");
+                account.setPassword("$2a$12$WX/rVBMEwBA5eBCk0a3nJekGoEvcV8YZPNSUagGQ.8LrZWOT9/IUi");                account = accountService.registerAccount(account);
                 account = accountService.registerAccount(account);
                 studentDTO.setAccountId(account.getAccountId());
                 AccountRoleDTO accountRoleDTO = new AccountRoleDTO();

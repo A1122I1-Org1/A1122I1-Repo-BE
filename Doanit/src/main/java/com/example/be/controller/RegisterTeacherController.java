@@ -48,7 +48,7 @@ public class RegisterTeacherController {
     @PreAuthorize("hasAnyRole('STUDENT', 'GROUP_LEADER')")
     @GetMapping(value = "/list" )
     public ResponseEntity<?> getRegisterService(@RequestParam(value = "page", defaultValue = "0") Integer page){
-        Page<IRegisterTeacherDTO> teacher = iRegisterTeacherService.getListTeacherRegistered(PageRequest.of(page, 1));
+        Page<IRegisterTeacherDTO> teacher = iRegisterTeacherService.getListTeacherRegistered(PageRequest.of(page, 3));
         if (teacher.isEmpty()){
             return new ResponseEntity<>("Không tìm thấy giáo viên muốn đăng ký", HttpStatus.BAD_REQUEST);
         }

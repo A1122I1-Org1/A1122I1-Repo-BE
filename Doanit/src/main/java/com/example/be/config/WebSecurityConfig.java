@@ -52,15 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/auth/sign-in").permitAll()
-                .antMatchers("/api/users/**").hasRole("USER")
-                .antMatchers("/api/admin/**").hasRole("ADMIN")
-                .antMatchers("/api/public/topic-manager/topic").permitAll() // Đường dẫn cho phương thức pageTopic
-                .antMatchers("/api/public/topic-manager/topic-search").permitAll() // Đường dẫn cho phương thức pageTopicFind
-                .antMatchers("/api/public/topic-manager/findById/{id}").permitAll() // Đường dẫn cho phương thức findTopicById
-                .antMatchers("/notification/{id}").permitAll() // Đường dẫn cho phương thức getListNotification
-                .antMatchers("/seen-notification/{id}").permitAll() // Đường dẫn cho phương thức seenNotification
+                .antMatchers("/api/Group/joinGroup").permitAll()
                 .anyRequest().authenticated();
-
         httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 

@@ -37,8 +37,6 @@ public class UserPrinciple implements UserDetails {
 
 
     public UserPrinciple mapUserToUserPrinciple(Account account ) {
-        /*GrantedAuthority là một interface trong Spring Security, đại diện cho một quyền hạn được cấp cho Authentication*/
-
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<AccountRole> accountRoleList = accountRoleSerivice.findAllByAccount(account);
 

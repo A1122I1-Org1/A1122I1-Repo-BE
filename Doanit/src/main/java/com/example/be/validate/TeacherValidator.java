@@ -17,8 +17,8 @@ public class TeacherValidator {
 
     @Autowired
     private TeacherRepository teacherRepository;
-    
-    private final Pattern PATTERN_NAME = Pattern.compile("^[a-zA-Z\\s]+$");
+
+    private final Pattern PATTERN_NAME = Pattern.compile("^[\\p{L}\\s]+$");
     private final Pattern PATTERN_EMAIL = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
     private final Pattern PATTERN_PHONE = Pattern.compile("^[0-9]+$");
 
@@ -69,12 +69,12 @@ public class TeacherValidator {
 
             List<ITeacherUpdateDTO> teachers = teacherRepository.getTeacherByPhone(createUpdateTeacherDTO.getPhone());
             if (!teachers.isEmpty()) {
-                errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
+                errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại, vui lòng nhập số điện thoại khác");
             }
 
             teachers = teacherRepository.getTeacherByEmail(createUpdateTeacherDTO.getEmail());
             if (!teachers.isEmpty()) {
-                errors.put("errorEmailDuplicate","Email đã tồn tại");
+                errors.put("errorEmailDuplicate","Email đã tồn tại, vui lòng nhập email khác");
             }
 
 

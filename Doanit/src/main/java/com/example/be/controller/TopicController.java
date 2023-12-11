@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,8 @@ public class TopicController {
     TopicValidator topicValidator;
 @Autowired
     IAccountService iAccountService;
+
+    @PreAuthorize("hasRole('LEADER')" )
     @RequestMapping(value = "/create_topic", method = RequestMethod.POST, consumes = {"application/json"})
     private ResponseEntity<?> registerTopic(@RequestBody InfoTopicRegisterDTO infoTopicRegisterDTO) {
         Map<String, String> errors = topicValidator.validate(infoTopicRegisterDTO);

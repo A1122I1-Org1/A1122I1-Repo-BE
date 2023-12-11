@@ -13,7 +13,8 @@ import java.util.Date;
 //@Slf4j của tv Lombok, dsd để tự động tạo ra một đối tượng Logger của SLF4J
 public class JwtTokenProvider {
     private String JWT_SECRET="LoiTH";
-    private int JWT_EXPIRATION=24*3600*1000;
+//    private int JWT_EXPIRATION=3600*1000;
+    private int JWT_EXPIRATION=1*60*1000;
 
     public String genarateToken(UserPrinciple userPrinciple){
         Date now= new Date();

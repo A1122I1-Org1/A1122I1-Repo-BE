@@ -9,6 +9,7 @@ import com.example.be.validate.GroupAccountValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class GroupAccountController {
     GroupAccountValidator groupAccountValidator;
     @Autowired
     IAccountService iAccountService;
+    @PreAuthorize("hasRole('STUDENT')" )
     @PostMapping("/createGroup")
     public ResponseEntity<?> doCreateGroup(@RequestBody GroupAccountDTO groupAccountDto) {
         UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -41,6 +43,7 @@ public class GroupAccountController {
         }
     }
 
+    @PreAuthorize("hasRole('STUDENT')" )
     @GetMapping("/joinGroup")
     public ResponseEntity<?> joinGroup(@RequestParam("studentID") Integer studentId, @RequestParam("groupId") Integer groupId) {
         IGroupAccountService.acceptJoinGroup(groupId, studentId);

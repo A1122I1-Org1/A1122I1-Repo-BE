@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,6 +45,8 @@ public class TeacherController {
     private IFacultyService facultyService;
     @Autowired
     private IDegreeService degreeService;
+
+    @PreAuthorize("hasRole('ADMIN')" )
     @PostMapping("/createTeacher")
     public ResponseEntity<?> createTeacher(@RequestBody CreateUpdateTeacherDTO teacherDTO) {
         if (teacherDTO == null) {
@@ -68,7 +71,9 @@ public class TeacherController {
         }
     }
 
+
     @GetMapping(value = "/getTeacherById/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ITeacherUpdateDTO> findStudentById(@PathVariable Integer id){
         ITeacherUpdateDTO teacher = teacherService.getTeacherById(id);
         if (teacher == null){
@@ -76,6 +81,7 @@ public class TeacherController {
         }
         return new ResponseEntity<ITeacherUpdateDTO>(teacher, HttpStatus.OK);
     }
+
 
     @GetMapping(value = "/getAllFaculty")
     public ResponseEntity<List<Faculty>> getAllFaculty(){
@@ -97,6 +103,7 @@ public class TeacherController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')" )
     @PostMapping("/updateTeacher")
     public ResponseEntity<?> updateTeacher(@RequestBody CreateUpdateTeacherDTO teacherDTO) {
         if (teacherService.getTeacherById(teacherDTO.getTeacherId()) == null) {
@@ -111,6 +118,8 @@ public class TeacherController {
             }
         }
     }
+
+    @PreAuthorize("hasRole('ADMIN')" )
     @GetMapping("/list")
     public ResponseEntity<Page<ITeacherDto>> getAllTeacher(@RequestParam(defaultValue = "") String find,
                                                            @RequestParam(value = "page") Integer page){
@@ -121,6 +130,7 @@ public class TeacherController {
         return new ResponseEntity<>(listTeacher, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')" )
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Integer id){
         teacherService.deleteTeacher(id);

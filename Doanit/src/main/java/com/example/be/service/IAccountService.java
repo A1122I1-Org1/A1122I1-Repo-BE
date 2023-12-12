@@ -3,13 +3,10 @@ package com.example.be.service;
 
 import com.example.be.entity.Account;
 
-
-
 import javax.transaction.Transactional;
 
 
 @Transactional
-
 public interface IAccountService {
 
     Account findByUsername(String username);

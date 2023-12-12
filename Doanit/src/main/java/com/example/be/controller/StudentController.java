@@ -1,19 +1,17 @@
 package com.example.be.controller;
 
-import com.example.be.dto.ITeacherUpdateDTO;
-import com.example.be.entity.Teacher;
-import com.example.be.security.UserPrinciple;
-import com.example.be.service.ITeacherService;
 import com.example.be.dto.AccountRoleDTO;
 import com.example.be.dto.CreateUpdateStudentDTO;
-import com.example.be.dto.CreateUpdateTeacherDTO;
 import com.example.be.dto.IStudentEditDTO;
+import com.example.be.dto.ITeacherUpdateDTO;
 import com.example.be.entity.Account;
 import com.example.be.entity.Student;
+import com.example.be.security.UserPrinciple;
 import com.example.be.service.IAccountService;
 import com.example.be.service.IStudentService;
-import com.example.be.service.impl.AccountServiceImpl;
+import com.example.be.service.ITeacherService;
 import com.example.be.validate.StudentValidator;
+import com.example.be.validate.StudentValidatorUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,8 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
@@ -43,7 +43,10 @@ public class StudentController {
     @Autowired
     StudentValidator studentValidator;
 
-    @PreAuthorize("hasRole('ADMIN')" )
+    @Autowired
+    StudentValidatorUpdate studentValidatorUpdate;
+
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/student-list",method = RequestMethod.GET)
     public ResponseEntity<Page<Student>> getAllStudent(@RequestParam(value = "find",defaultValue = "") String find,
                                                        @RequestParam(value = "page", defaultValue = "0") Integer page){
@@ -73,9 +76,10 @@ public class StudentController {
      * KhoaHND
      * Edit Student
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/edit-student", method = RequestMethod.PUT)
     public ResponseEntity<?> editStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
-        Map<String,String> errors  = studentValidator.validate(studentDTO);
+        Map<String,String> errors  = studentValidatorUpdate.validate(studentDTO);
         if(errors.isEmpty()){
             IStudentService.editStudent(studentDTO);
             return new ResponseEntity<CreateUpdateStudentDTO>(studentDTO,HttpStatus.OK);
@@ -87,6 +91,7 @@ public class StudentController {
      * KhoaHND
      * create Student
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/create-student",method = RequestMethod.POST)
     public ResponseEntity<?> createStudent(@RequestBody CreateUpdateStudentDTO studentDTO){
         if(studentDTO == null){
@@ -117,6 +122,7 @@ public class StudentController {
      * KhoaHND
      * Find Student By Id
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/get-student-by-studentId/{studentId}", method = RequestMethod.GET)
     public ResponseEntity<IStudentEditDTO> findStudentById(@PathVariable Integer studentId){
         IStudentEditDTO student = IStudentService.findStudentByStudentId(studentId);

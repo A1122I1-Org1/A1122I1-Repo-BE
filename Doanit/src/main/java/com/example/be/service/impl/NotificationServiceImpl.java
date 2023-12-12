@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class NotificationServiceImpl implements INotificationService {
     @Autowired
@@ -26,7 +27,7 @@ public class NotificationServiceImpl implements INotificationService {
     }
 
     @Override
-    public List<Notification> getListNotificationNotSeen(Integer id) {
-        return notificationRepository.findByAccountIdAndStatusIsTrue(id);
+    public List<Notification> getListNotificationNotSeen(Integer accountId, Integer notificationId) {
+        return notificationRepository.findByAccountIdAndStatusIsTrue(accountId, notificationId);
     }
 }

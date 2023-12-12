@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface InfoTopicRegisterRepository extends JpaRepository<InfoTopicRegister,Integer> {
+public interface InfoTopicRegisterRepository extends JpaRepository <InfoTopicRegister,Integer> {
 }

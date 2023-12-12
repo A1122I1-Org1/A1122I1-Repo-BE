@@ -31,12 +31,12 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "reply_comment_id", referencedColumnName = "comment_id")
-    private Comment replyComment;
+    private com.example.be.entity.Comment replyComment;
 
     public Comment() {
     }
 
-    public Comment(Integer commentId, String timeComment, String title, String content, Boolean status, Boolean deleteFlag, TopicProcess topicProcess, Account account, Comment replyComment) {
+    public Comment(Integer commentId, String timeComment, String title, String content, Boolean status, Boolean deleteFlag, TopicProcess topicProcess, Account account, com.example.be.entity.Comment replyComment) {
         this.commentId = commentId;
         this.timeComment = timeComment;
         this.title = title;
@@ -112,11 +112,11 @@ public class Comment {
         this.account = account;
     }
 
-    public Comment getReplyComment() {
+    public com.example.be.entity.Comment getReplyComment() {
         return replyComment;
     }
 
-    public void setReplyComment(Comment replyComment) {
+    public void setReplyComment(com.example.be.entity.Comment replyComment) {
         this.replyComment = replyComment;
     }
 }

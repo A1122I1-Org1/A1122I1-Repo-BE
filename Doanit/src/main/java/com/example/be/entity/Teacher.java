@@ -1,7 +1,6 @@
 package com.example.be.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 

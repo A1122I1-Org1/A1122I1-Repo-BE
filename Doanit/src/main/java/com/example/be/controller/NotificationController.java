@@ -1,6 +1,9 @@
 package com.example.be.controller;
 
+import com.example.be.entity.Account;
 import com.example.be.entity.Notification;
+import com.example.be.security.UserPrinciple;
+import com.example.be.service.IAccountService;
 import com.example.be.service.INotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,29 +25,37 @@ import java.util.List;
 public class NotificationController {
 
     @Autowired
+    private IAccountService iAccountService;
+
+    @Autowired
     private INotificationService notificationService;
 
     @PreAuthorize("hasRole('STUDENT')" )
-    @GetMapping("/notification/{id}")
-    private ResponseEntity<?> getListNotification(@PathVariable Integer id,
-                                                  @PageableDefault(size = 5) Pageable pageable) {
-        Page<Notification> notificationList = notificationService.getListNotification(id, pageable);
+    @GetMapping("/notification")
+    private ResponseEntity<?> getListNotification(
+            @PageableDefault(size = 5) Pageable pageable) {
+        UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = iAccountService.findByUsername(userPrinciple.getUsername());
+        Page<Notification> notificationList = notificationService.getListNotification(account.getAccountId(), pageable);
 
         return new ResponseEntity<>(notificationList, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('STUDENT')" )
-    @GetMapping("/seen-notification/{id}")
-    private ResponseEntity<?> seenNotification(@PathVariable Integer id,
-                                               @PageableDefault(size = 5) Pageable pageable) {
-        List<Notification> notificationList = notificationService.getListNotificationNotSeen(id);
+    @GetMapping("/seen-notification/{notificationId}")
+    private ResponseEntity<?> seenNotification(
+            @PathVariable Integer notificationId,
+            @PageableDefault(size = 5) Pageable pageable) {
+        UserPrinciple userPrinciple = (UserPrinciple) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Account account = iAccountService.findByUsername(userPrinciple.getUsername());
+        List<Notification> notificationList = notificationService.getListNotificationNotSeen(account.getAccountId(),notificationId);
 
         for (Notification notification : notificationList) {
             notification.setStatus(true);
             notificationService.save(notification);
         }
 
-        Page<Notification> notificationPage = notificationService.getListNotification(id, pageable);
+        Page<Notification> notificationPage = notificationService.getListNotification(account.getAccountId(), pageable);
 
         return new ResponseEntity<>(notificationPage, HttpStatus.OK);
     }

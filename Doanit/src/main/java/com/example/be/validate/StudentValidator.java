@@ -95,15 +95,16 @@ public class StudentValidator {
         }
 
         //validate duplicate
-        List<IStudentEditDTO> students=studentRepository.findStudentByPhone(createUpdateStudentDTO.getPhone());
-        if(!students.isEmpty()){
-            errors.put("errorPhoneDuplicate","Số điện thoại đã tồn tại");
-        }
+            List<IStudentEditDTO> students = studentRepository.findStudentByPhone(createUpdateStudentDTO.getPhone());
+            if (!students.isEmpty()) {
+                errors.put("errorPhoneDuplicate", "Số điện thoại đã tồn tại");
+            }
 
-        students=studentRepository.findStudentByEmail(createUpdateStudentDTO.getEmail());
-        if(!students.isEmpty()){
-            errors.put("errorEmailDuplicate","Email đã tồn tại");
-        }
+            students = studentRepository.findStudentByEmail(createUpdateStudentDTO.getEmail());
+            if (!students.isEmpty()) {
+                errors.put("errorEmailDuplicate", "Email đã tồn tại");
+            }
+
 
 
         return errors;

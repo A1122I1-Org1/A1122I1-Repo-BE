@@ -19,7 +19,7 @@ public class Topic {
     @Column(columnDefinition = "TEXT")
     private String content;
     @Column(name = "delete_flag")
-    private Boolean deleteFlag;
+    private Integer deleteFlag;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", referencedColumnName = "faculty_id")
@@ -28,7 +28,7 @@ public class Topic {
     public Topic() {
     }
 
-    public Topic(Integer topicId, String name, String introduce, String image, String content, Boolean deleteFlag, Faculty faculty) {
+    public Topic(Integer topicId, String name, String introduce, String image, String content, Integer deleteFlag, Faculty faculty) {
         this.topicId = topicId;
         this.name = name;
         this.introduce = introduce;
@@ -78,11 +78,11 @@ public class Topic {
         this.content = content;
     }
 
-    public Boolean getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
-    public void setDeleteFlag(Boolean deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 

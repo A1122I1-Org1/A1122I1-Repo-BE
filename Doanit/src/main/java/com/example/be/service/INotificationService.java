@@ -11,5 +11,5 @@ public interface INotificationService {
 
     Page<Notification> getListNotification(Integer id, Pageable pageable);
 
-    List<Notification> getListNotificationNotSeen(Integer id);
+    List<Notification> getListNotificationNotSeen(Integer accountId, Integer notificationId);
 }

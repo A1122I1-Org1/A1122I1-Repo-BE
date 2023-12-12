@@ -3,7 +3,6 @@ package com.example.be.security;
 import com.example.be.entity.Account;
 import com.example.be.entity.AccountRole;
 import com.example.be.service.IAccountRoleSerivice;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UserPrinciple implements UserDetails {
 
 
 
-    public UserPrinciple mapUserToUserPrinciple(Account account ) {
+    public com.example.be.security.UserPrinciple mapUserToUserPrinciple(Account account ) {
         /*GrantedAuthority là một interface trong Spring Security, đại diện cho một quyền hạn được cấp cho Authentication*/
 
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -49,7 +48,7 @@ public class UserPrinciple implements UserDetails {
             }
         }
         /* SimpleGrantedAuthority là một lớp cơ bản trong Spring Security, nó cung cấp một cách đơn giản để tạo ra một GrantedAuthority*/
-        return new UserPrinciple(account.getAccountId(), account.getUsername(), account.getPassword(), authorities);
+        return new com.example.be.security.UserPrinciple(account.getAccountId(), account.getUsername(), account.getPassword(), authorities);
     }
 
     public UserPrinciple(Integer userId, String userName, String password, Collection<? extends GrantedAuthority> roles) {
